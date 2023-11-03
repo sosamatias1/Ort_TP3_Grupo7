@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
 
-        initRecyclerView()
+
         return view
     }
 
@@ -42,14 +42,22 @@ class HomeFragment : Fragment() {
         for (i in 1..10) {
             listaDePerros.add(Perro("Perro$i"))
         }
+        initRecyclerView()
     }
 
     fun initRecyclerView(){
+        requireActivity()
+        recyclerView.setHasFixedSize(true)
         adapter = PerrosAdapter(listaDePerros)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = linearLayoutManager
+
+
+
+
+
     }
 
 }
