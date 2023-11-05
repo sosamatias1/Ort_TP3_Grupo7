@@ -15,15 +15,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:title="">
 
         <TextView
-            android:id="@+id/title_textView"
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="TextView" />
+            android:layout_gravity="center" />
 
     </androidx.appcompat.widget.Toolbar>
 

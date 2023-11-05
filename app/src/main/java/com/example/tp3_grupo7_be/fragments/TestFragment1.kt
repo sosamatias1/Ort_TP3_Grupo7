@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.tp3_grupo7_be.R
 
 
+
 class TestFragment1 : Fragment() {
 
 
