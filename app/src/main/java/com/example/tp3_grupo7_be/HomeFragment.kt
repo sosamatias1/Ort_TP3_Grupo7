@@ -57,8 +57,6 @@ class HomeFragment : Fragment() {
             loadPerroRecycler()
             initRecyclerView()
         }
-
-
     }
 
 
@@ -94,7 +92,7 @@ class HomeFragment : Fragment() {
     fun loadPerroRecycler(){
         for (i in 1..10) {
             val imagen: String = listaDeImagenes.get(i)
-            listaDePerros.add(Perro("Perro$i", imagen,"Raza$i", "SubRaza$i", true ))
+            listaDePerros.add(Perro("Perro$i", imagen,"Raza$i", "SubRaza$i", true, Perro.Provincias.BUENOS_AIRES.toString()))
         }
     }
 
