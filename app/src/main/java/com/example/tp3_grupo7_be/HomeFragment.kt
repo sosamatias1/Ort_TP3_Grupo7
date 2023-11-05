@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
+import com.example.tp3_grupo7_be.database.appDatabase
+import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
 import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
@@ -30,6 +32,9 @@ class HomeFragment : Fragment() {
     lateinit var linearLayoutManager: LinearLayoutManager
     var listaDePerros: MutableList<Perro> = ArrayList()
     var listaDeImagenes: MutableList<String> = ArrayList()
+
+    private var db: appDatabase? = null
+    private var perroDao: perroDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +59,15 @@ class HomeFragment : Fragment() {
             val resultado = loadImagenes()
         lifecycleScope.launch {
             resultado.await()
-            loadPerroRecycler()
+            cargarDB()
             initRecyclerView()
+           // loadPerroRecycler()
         }
+        val context = view?.context
+        if (context != null) {
+            db = appDatabase.getAppDataBase(context)
+            }
+        perroDao = db?.perroDao()
     }
 
 
@@ -64,6 +75,7 @@ class HomeFragment : Fragment() {
     fun initRecyclerView(){
         requireActivity()
         recyclerView.setHasFixedSize(true)
+        listaDePerros = perroDao?.loadAllPerrosNoAdoptados()!!
         adapter = PerrosAdapter(listaDePerros)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
@@ -91,9 +103,24 @@ class HomeFragment : Fragment() {
 
     fun loadPerroRecycler(){
         for (i in 1..10) {
+
             val imagen: String = listaDeImagenes.get(i)
-            listaDePerros.add(Perro("Perro$i", imagen,"Raza$i", "SubRaza$i", true, Perro.Provincias.BUENOS_AIRES.toString()))
+            listaDePerros.add(Perro("Perro$i", imagen,"Raza$i", "SubRaza$i", true, Perro.Provincias.BUENOS_AIRES.toString(), false))
         }
     }
+
+    fun cargarDB(){
+
+    if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
+
+        perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false))
+        perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false))
+        perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false))
+        perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false))
+        perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false))
+        perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false))
+        perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false))
+    }
+        }
 
 }
