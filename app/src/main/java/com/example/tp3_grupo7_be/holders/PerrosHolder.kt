@@ -13,11 +13,17 @@ import com.squareup.picasso.Picasso
 class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
 
     private var view: View
+    val checkBox: CheckBox = itemView.findViewById(R.id.favorito_perro)
+
 
     init {
         this.view = v
-    }
 
+    }
+    fun setId(id: Int){
+        val txt: TextView = view.findViewById(R.id.id_perro)
+        txt.text = id.toString()
+    }
     fun setNombre(nombre: String) {
         val txt: TextView = view.findViewById(R.id.nombre_perro)
         txt.text = nombre
@@ -39,7 +45,8 @@ class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
         txt.text = subRaza
     }
     fun setFavorito(favorito: Boolean) {
-        val estado: CheckBox = view.findViewById(R.id.favorito_perro)
-        estado.isChecked = favorito
+        val checkBox1: CheckBox = view.findViewById(R.id.favorito_perro)
+        checkBox1.isChecked = favorito
         }
+
 }

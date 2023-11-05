@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.holders.PerrosHolder
+import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
 import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
@@ -21,17 +24,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), AdaptadorClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: PerrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var listaDePerros: MutableList<Perro> = ArrayList()
     var listaDeImagenes: MutableList<String> = ArrayList()
+
 
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
@@ -50,33 +55,37 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_home)
 
 
+
         return view
     }
 
 
     override fun onStart() {
         super.onStart()
-            val resultado = loadImagenes()
+        val resultado = loadImagenes()
         lifecycleScope.launch {
             resultado.await()
             cargarDB()
             initRecyclerView()
-           // loadPerroRecycler()
+            // loadPerroRecycler()
         }
         val context = view?.context
         if (context != null) {
             db = appDatabase.getAppDataBase(context)
-            }
+        }
         perroDao = db?.perroDao()
+
+
+
     }
 
-
-
     fun initRecyclerView(){
+
         requireActivity()
         recyclerView.setHasFixedSize(true)
         listaDePerros = perroDao?.loadAllPerrosNoAdoptados()!!
         adapter = PerrosAdapter(listaDePerros)
+        adapter.setClickListener(this)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
@@ -122,5 +131,15 @@ class HomeFragment : Fragment() {
         perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false))
     }
         }
+
+
+    override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
+        // Realiza la actualización en la base de datos desde el fragmento
+        // Asegúrate de usar coroutines si es necesario
+        lifecycleScope.launch {
+            val filasActualizadas = perroDao?.updateFavoritoPerro(isChecked, perro.id)
+            Log.d("Debug", "Filas actualizadas: $filasActualizadas")
+        }
+    }
 
 }
