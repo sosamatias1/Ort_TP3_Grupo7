@@ -15,8 +15,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.tp3_grupo7_be.FragmentTitles
-import com.example.tp3_grupo7_be.fragments.TestFragment1
-import com.example.tp3_grupo7_be.fragments.TestFragment2
+import com.example.tp3_grupo7_be.fragments.PerfilFragment
+import com.example.tp3_grupo7_be.fragments.ConfiguracionFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 drawer.closeDrawer(GravityCompat.START)
             } else {
                 val currentFragment = getCurrentFragment()
-                if (currentFragment == TestFragment1::class.java.simpleName || currentFragment == TestFragment2::class.java.simpleName) {
+                if (currentFragment == PerfilFragment::class.java.simpleName || currentFragment == ConfiguracionFragment::class.java.simpleName) {
                     onBackPressed()
                 } else {
                     drawer.openDrawer(GravityCompat.START)
