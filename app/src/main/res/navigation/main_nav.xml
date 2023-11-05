@@ -26,12 +26,12 @@
         tools:layout="@layout/fragment_publicacion" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.tp3_grupo7_be.fragments.TestFragment1"
+        android:name="com.example.tp3_grupo7_be.fragments.PerfilFragment"
         android:label="fragment_test1"
-        tools:layout="@layout/fragment_test1" />
+        tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/settings"
-        android:name="com.example.tp3_grupo7_be.fragments.TestFragment2"
+        android:name="com.example.tp3_grupo7_be.fragments.ConfiguracionFragment"
         android:label="fragment_test2"
-        tools:layout="@layout/fragment_test2" />
+        tools:layout="@layout/fragment_configuracion" />
 </navigation>

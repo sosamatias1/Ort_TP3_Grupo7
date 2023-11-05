@@ -2,5 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="titulo_toolbar">#001D42</color>
+    <color name="subir_foto_btn">#3D405B</color>
+    <color name="subir_foto_txt">#F4F1DE</color>
+    <color name="nombre_perfil">#001E2F</color>
 </resources>
