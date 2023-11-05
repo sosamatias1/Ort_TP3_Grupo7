@@ -23,5 +23,8 @@ class PerrosAdapter(private val list: MutableList<Perro>): Adapter<PerrosHolder>
         val perro = list[position]
         holder.setNombre(perro.nombre)
         holder.setImagen(perro.imagen)
+        holder.setRaza(perro.raza)
+        holder.setSubRaza(perro.subRaza)
+        holder.setFavorito(perro.favorito)
     }
 }
