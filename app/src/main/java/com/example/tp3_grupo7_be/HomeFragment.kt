@@ -1,16 +1,20 @@
 package com.example.tp3_grupo7_be
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.models.Perro
+import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
+import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -18,6 +22,7 @@ class HomeFragment : Fragment() {
     lateinit var adapter: PerrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var listaDePerros: MutableList<Perro> = ArrayList()
+    var listaDeImagenes: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +41,13 @@ class HomeFragment : Fragment() {
         return view
     }
 
+
     override fun onStart() {
         super.onStart()
 
-        for (i in 1..10) {
-            listaDePerros.add(Perro("Perro$i"))
-        }
+        loadImagenes()
+        Log.e("prueba", listaDeImagenes.toString())
+
         initRecyclerView()
     }
 
@@ -54,10 +60,38 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = linearLayoutManager
 
-
-
-
-
     }
 
+    fun loadImagenes(){
+        val service = ActivityServiceApiBuilder.create()
+        service.getImagenes().enqueue(object: Callback<ImagenPerroRespuesta> {
+            override fun onResponse(
+                call: Call<ImagenPerroRespuesta>,
+                response: Response<ImagenPerroRespuesta>
+            ) {
+
+                if(response.isSuccessful){
+                    val responseImagenes = response.body()
+                    val imagenes = responseImagenes?.imagenes ?: emptyList()
+                    listaDeImagenes.clear()
+                    listaDeImagenes.addAll(imagenes)
+                }else{
+                    print("Error con el loadImagenes")
+                }
+                for (i in 1..10) {
+                    val imagen: String = listaDeImagenes.get(i)
+                    listaDePerros.add(Perro("Perro$i", imagen))
+                }
+                initRecyclerView()
+
+            }
+
+            override fun onFailure(call: Call<ImagenPerroRespuesta>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
+
+    }
 }
