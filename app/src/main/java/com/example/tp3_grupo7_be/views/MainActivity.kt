@@ -8,22 +8,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.setupWithNavController
 import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.tp3_grupo7_be.FragmentTitles
-import com.example.tp3_grupo7_be.HomeFragment
 import com.example.tp3_grupo7_be.fragments.TestFragment1
 import com.example.tp3_grupo7_be.fragments.TestFragment2
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.navigation.NavigationBarView
 
 
@@ -40,31 +34,12 @@ class MainActivity : AppCompatActivity() {
 
 
         setNavHostFragment()
-
         setToolbar()
-
         setBottomNavBar()
-
         setDrawerMenu()
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            val fragmentId = destination.id
-            val title = FragmentTitles.getTitleForFragment(fragmentId)
-            val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
-            toolbarTitle.text = title
-
-            if (fragmentId == R.id.profile || fragmentId == R.id.settings) {
-                val backIcon = ContextCompat.getDrawable(this, R.drawable.back_icon)
-
-                toggle.setHomeAsUpIndicator(backIcon)
-            } else {
-                val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
-                toggle.setHomeAsUpIndicator(drawerIcon)
-            }
-        }
+        onDestinationChangedListener()
 
         NavigationUI.setupWithNavController(navigationView, navController)
-
 
     }
 
@@ -81,6 +56,24 @@ class MainActivity : AppCompatActivity() {
         toolbar= findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun onDestinationChangedListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val fragmentId = destination.id
+            val title = FragmentTitles.getTitleForFragment(fragmentId)
+            val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
+            toolbarTitle.text = title
+
+            if (fragmentId == R.id.profile || fragmentId == R.id.settings) {
+                val backIcon = ContextCompat.getDrawable(this, R.drawable.back_icon)
+
+                toggle.setHomeAsUpIndicator(backIcon)
+            } else {
+                val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
+                toggle.setHomeAsUpIndicator(drawerIcon)
+            }
+        }
     }
     fun setBottomNavBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_bar)
