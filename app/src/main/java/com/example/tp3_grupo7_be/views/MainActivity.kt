@@ -1,6 +1,5 @@
 package com.example.tp3_grupo7_be.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -9,6 +8,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
@@ -17,6 +20,12 @@ import com.example.tp3_grupo7_be.FragmentTitles
 import com.example.tp3_grupo7_be.HomeFragment
 import com.example.tp3_grupo7_be.fragments.TestFragment1
 import com.example.tp3_grupo7_be.fragments.TestFragment2
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.navigation.NavigationBarView
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawer : DrawerLayout
@@ -26,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setBottomNavBar()
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -92,6 +104,23 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun setBottomNavBar() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_bar)
+
+        //Desabilitar Shifting para que muestre más de 3 items
+        bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
+        bottomNavigationView.itemBackground = null
+        val menu = bottomNavigationView.menu
+        menu.clear()
+        menuInflater.inflate(R.menu.bottom_menu, menu)
+
+        //Navegación
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
+    }
+
     private fun getCurrentFragment(): String {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
@@ -101,3 +130,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+

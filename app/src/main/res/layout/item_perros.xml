@@ -9,7 +9,11 @@
         android:id="@+id/constraint_cardview_perros"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <ImageView
+            android:id="@+id/imagen_perro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"

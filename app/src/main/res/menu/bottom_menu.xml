@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/favoritosFragment"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/adopcionFragment"
+        android:title="Adopcion" />
+
+    <item
+        android:id="@+id/publicacionFragment"
+        android:title="Publicacion" />
+
+</menu>

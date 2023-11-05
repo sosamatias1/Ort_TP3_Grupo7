@@ -10,6 +10,21 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="com.example.tp3_grupo7_be.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/adopcionFragment"
+        android:name="com.example.tp3_grupo7_be.AdopcionFragment"
+        android:label="fragment_adopcion"
+        tools:layout="@layout/fragment_adopcion" />
+    <fragment
+        android:id="@+id/publicacionFragment"
+        android:name="com.example.tp3_grupo7_be.PublicacionFragment"
+        android:label="fragment_publicacion"
+        tools:layout="@layout/fragment_publicacion" />
+    <fragment
         android:id="@+id/profile"
         android:name="com.example.tp3_grupo7_be.fragments.TestFragment1"
         android:label="fragment_test1"
