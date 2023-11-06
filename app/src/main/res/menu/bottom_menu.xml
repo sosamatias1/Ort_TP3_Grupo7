@@ -3,18 +3,22 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="Home" />
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
 
     <item
         android:id="@+id/favoritosFragment"
-        android:title="Favoritos" />
+        android:title="Favoritos"
+        android:icon="@drawable/baseline_menu_book_24"/>
 
     <item
         android:id="@+id/adopcionFragment"
-        android:title="Adopcion" />
+        android:title="Adopcion"
+        android:icon="@drawable/baseline_chat_bubble_24"/>
 
     <item
         android:id="@+id/publicacionFragment"
-        android:title="Publicacion" />
+        android:title="Publicacion"
+        android:icon="@drawable/baseline_person_24"/>
 
 </menu>
