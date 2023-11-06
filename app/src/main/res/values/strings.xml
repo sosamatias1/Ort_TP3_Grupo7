@@ -7,4 +7,6 @@
     <string name="nav_drawer_open">Abrir</string>
     <string name="nav_drawer_close">Cerrar</string>
     <string name="btn_subir_foto">Subir Foto</string>
+    <string name="general_config">Generales</string>
+    <string name="modo_oscuro">Modo Oscuro</string>
 </resources>
