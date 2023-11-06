@@ -4,8 +4,10 @@
 
     <item
         android:id="@+id/profile"
+        android:icon="@drawable/profile_icon"
         android:title="@string/drawer_profile_item" />
     <item
         android:id="@+id/settings"
+        android:icon="@drawable/settings_icon"
         android:title="@string/drawer_config_item" />
 </menu>
