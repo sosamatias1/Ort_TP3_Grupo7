@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_item_perros"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="200dp"
+    android:layout_marginTop="10dp"
+    android:layout_margin="15dp"
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_cardview_perros"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+
         <ImageView
             android:id="@+id/imagen_perro"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/nombre_perro"
-            android:text="nombre"
-            app:layout_constraintBottom_toTopOf="@id/raza_perro"
+            android:scaleType="centerCrop"
+
+            tools:srcCompat="@tools:sample/avatars"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nombre_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/white"
+            android:text="Nombre"
+            android:textSize="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintBottom_toTopOf="@id/raza_perro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5">
@@ -29,13 +46,15 @@
         </TextView>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="raza"
             android:id="@+id/raza_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_regular"
+            android:textColor="@color/white"
+            android:text="raza"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toTopOf="@id/subraza_perro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nombre_perro"
             app:layout_constraintVertical_bias="0.5">
@@ -43,13 +62,15 @@
         </TextView>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="subraza"
             android:id="@+id/subraza_perro"
-            app:layout_constraintBottom_toTopOf="@id/edad_perro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_regular"
+            android:textColor="@color/white"
+            android:text="subraza"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5">
@@ -57,18 +78,50 @@
         </TextView>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="edad"
             android:id="@+id/edad_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:textColor="@color/white"
+            android:text="Edad / Genero"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subraza_perro"
+            app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5">
 
         </TextView>
+        <TextView
+            android:id="@+id/id_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/white"
+            android:text=""
+            android:textSize="0dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintBottom_toTopOf="@id/raza_perro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+        </TextView>
+
+
+
+        <CheckBox
+            android:id="@+id/favorito_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:buttonCompat="@drawable/bookmark_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

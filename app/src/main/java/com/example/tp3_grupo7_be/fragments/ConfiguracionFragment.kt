@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import com.example.tp3_grupo7_be.R
 
 
-
-class TestFragment1 : Fragment() {
-
+class ConfiguracionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +20,7 @@ class TestFragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test1, container, false)
+        return inflater.inflate(R.layout.fragment_configuracion, container, false)
     }
 
 

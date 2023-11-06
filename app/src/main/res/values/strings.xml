@@ -6,4 +6,5 @@
     <string name="drawer_config_item">Configuracion</string>
     <string name="nav_drawer_open">Abrir</string>
     <string name="nav_drawer_close">Cerrar</string>
+    <string name="btn_subir_foto">Subir Foto</string>
 </resources>
