@@ -8,7 +8,12 @@
         android:id="@+id/homeFragment"
         android:name="com.example.tp3_grupo7_be.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_dogDetailFragment"
+            app:destination="@id/dogDetailFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.example.tp3_grupo7_be.FavoritosFragment"
@@ -34,4 +39,13 @@
         android:name="com.example.tp3_grupo7_be.fragments.TestFragment2"
         android:label="fragment_test2"
         tools:layout="@layout/fragment_test2" />
+    <fragment
+        android:id="@+id/dogDetailFragment"
+        android:name="com.example.tp3_grupo7_be.DogDetailFragment"
+        android:label="fragment_dog_detail"
+        tools:layout="@layout/fragment_dog_detail" >
+        <argument
+            android:name="ArgsDogDetail"
+            app:argType="com.example.tp3_grupo7_be.models.Perro" />
+    </fragment>
 </navigation>
