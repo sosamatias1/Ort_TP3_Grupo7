@@ -7,4 +7,6 @@
     <color name="subir_foto_txt">#F4F1DE</color>
     <color name="nombre_perfil_config">#001E2F</color>
     <color name="general_config">#1B72C0</color>
+    <color name="nav_header_hola">#7E8B97</color>
+    <color name="nav_header_linea">#E6E9F0</color>
 </resources>
