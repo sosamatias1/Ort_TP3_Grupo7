@@ -38,7 +38,7 @@
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/roboto400"
             android:text="Fran"
-            android:textColor="@color/nombre_perfil"
+            android:textColor="@color/nombre_perfil_config"
             android:textSize="32sp" />
 
         <androidx.appcompat.widget.AppCompatButton
