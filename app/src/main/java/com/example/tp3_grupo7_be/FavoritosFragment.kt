@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
@@ -21,7 +22,6 @@ import kotlinx.coroutines.launch
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 
 
 /**
@@ -70,15 +70,16 @@ class FavoritosFragment : Fragment(), AdaptadorClickListener {
         }
         perroDao = db?.perroDao()
         //val resultado = loadImagenes()
-    //    lifecycleScope.launch {
-            // resultado.await()
-            cargarDB()
-            initRecyclerView()
-            // loadPerroRecycler()
+        //    lifecycleScope.launch {
+        // resultado.await()
+        cargarDB()
+        initRecyclerView()
+        // loadPerroRecycler()
         //}
 
     }
-    fun initRecyclerView(){
+
+    fun initRecyclerView() {
         requireActivity()
         recyclerView.setHasFixedSize(true)
         listaDePerros = perroDao?.loadAllPerrosNoAdoptadosFavoritos()!!
@@ -90,17 +91,88 @@ class FavoritosFragment : Fragment(), AdaptadorClickListener {
         recyclerView.layoutManager = linearLayoutManager
 
     }
-    fun cargarDB(){
 
-        if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
+    fun cargarDB() {
 
-            perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false))
-            perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false))
-            perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false))
-            perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false))
-            perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false))
-            perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false))
-            perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false))
+        if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()) {
+
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro1",
+                    "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg",
+                    "Raza1",
+                    "SubRaza1",
+                    true,
+                    Perro.Provincias.BUENOS_AIRES,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro2",
+                    "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg",
+                    "Raza2",
+                    "SubRaza2",
+                    true,
+                    Perro.Provincias.BUENOS_AIRES,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro3",
+                    "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg",
+                    "Raza3",
+                    "SubRaza3",
+                    false,
+                    Perro.Provincias.CORDOBA,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro4",
+                    "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg",
+                    "Raza4",
+                    "SubRaza4",
+                    false,
+                    Perro.Provincias.CORDOBA,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro5",
+                    "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg",
+                    "Raza5",
+                    "SubRaza5",
+                    false,
+                    Perro.Provincias.SANTA_FE,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro6",
+                    "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg",
+                    "Raza6",
+                    "SubRaza6",
+                    false,
+                    Perro.Provincias.SANTA_FE,
+                    false
+                )
+            )
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro7",
+                    "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg",
+                    "Raza7",
+                    "SubRaza7",
+                    false,
+                    Perro.Provincias.BUENOS_AIRES,
+                    false
+                )
+            )
         }
     }
 
@@ -130,5 +202,10 @@ class FavoritosFragment : Fragment(), AdaptadorClickListener {
             Log.d("Debug", "Filas actualizadas: $filasActualizadas")
             initRecyclerView()
         }
+    }
+
+    override fun onViewItemDetail(perro: Perro) {
+        val action = FavoritosFragmentDirections.actionFavoritosFragmentToDogDetailFragment(perro)
+        this.findNavController().navigate(action)
     }
 }
