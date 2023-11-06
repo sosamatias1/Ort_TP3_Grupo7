@@ -21,10 +21,7 @@ class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
         this.view = v
 
     }
-    fun setId(id: Int){
-        val txt: TextView = view.findViewById(R.id.id_perro)
-        txt.text = id.toString()
-    }
+
     fun setNombre(nombre: String) {
         val txt: TextView = view.findViewById(R.id.nombre_perro)
         txt.text = nombre
