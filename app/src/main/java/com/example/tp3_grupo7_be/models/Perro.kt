@@ -1,8 +1,8 @@
 package com.example.tp3_grupo7_be.models
 
-import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.ColumnInfo
 import androidx.room.Entity
