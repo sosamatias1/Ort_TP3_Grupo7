@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.holders.PerrosHolder
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
@@ -51,6 +52,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
+
+
 
         return view
     }
@@ -120,6 +123,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     }
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
+        // Realiza la actualización en la base de datos desde el fragmento
+        // Asegúrate de usar coroutines si es necesario
         lifecycleScope.launch {
             val filasActualizadas = perroDao?.updateFavoritoPerro(isChecked, perro.id)
             Log.d("Debug", "Filas actualizadas: $filasActualizadas")

@@ -34,7 +34,7 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
     override fun onBindViewHolder(holder: PerrosHolder, position: Int) {
 
         val perro = list[position]
-        holder.setId(perro.id)
+
         holder.setNombre(perro.nombre)
         holder.setImagen(perro.imagen)
 
