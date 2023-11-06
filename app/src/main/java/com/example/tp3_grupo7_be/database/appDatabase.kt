@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.tp3_grupo7_be.models.Perro
 
-@Database(entities = [Perro::class], version = 3, exportSchema = false)
+@Database(entities = [Perro::class], version = 4, exportSchema = false)
 abstract class appDatabase : RoomDatabase() {
     abstract fun perroDao(): perroDao
 

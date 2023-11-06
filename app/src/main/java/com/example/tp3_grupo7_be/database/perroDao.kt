@@ -34,4 +34,11 @@ interface perroDao {
     @Query("UPDATE perros SET favorito = :favorito WHERE id = :id")
     fun updateFavoritoPerro(favorito: Boolean, id: Int)
 
+    @Query("SELECT * FROM perros WHERE raza = :raza ORDER BY id")
+    fun loadAllPerrosPorRaza(raza: String): MutableList<Perro>
+
+    @Query("SELECT * FROM perros WHERE nombre = :nombre ORDER BY id")
+    fun loadAllPerrosPorNombre(nombre: String): MutableList<Perro>
+
+
 }
