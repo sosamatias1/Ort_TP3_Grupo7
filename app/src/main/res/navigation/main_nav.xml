@@ -18,7 +18,12 @@
         android:id="@+id/favoritosFragment"
         android:name="com.example.tp3_grupo7_be.FavoritosFragment"
         android:label="fragment_favoritos"
-        tools:layout="@layout/fragment_favoritos" />
+        tools:layout="@layout/fragment_favoritos" >
+        <action
+            android:id="@+id/action_favoritosFragment_to_dogDetailFragment"
+            app:destination="@id/dogDetailFragment"
+            app:popUpTo="@id/favoritosFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adopcionFragment"
         android:name="com.example.tp3_grupo7_be.AdopcionFragment"

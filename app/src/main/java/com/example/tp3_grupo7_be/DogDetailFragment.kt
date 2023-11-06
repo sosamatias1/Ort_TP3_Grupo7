@@ -25,7 +25,7 @@ class DogDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_dog_detail, container, false)
-       // text = v.findViewById(R.id.dogDetail_name)
+       text = v.findViewById(R.id.dogDetail_name)
         return v
     }
 
