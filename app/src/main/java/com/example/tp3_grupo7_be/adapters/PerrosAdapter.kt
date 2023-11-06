@@ -34,7 +34,7 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
     override fun onBindViewHolder(holder: PerrosHolder, position: Int) {
 
         val perro = list[position]
-        holder.setId(perro.id)
+
         holder.setNombre(perro.nombre)
         holder.setImagen(perro.imagen)
 
@@ -44,10 +44,11 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
         holder.setRaza(perro.raza)
         holder.setSubRaza(perro.subRaza)
         holder.setFavorito(perro.favorito)
+        holder.setEdad(perro.edad)
+        holder.setGenero(perro.genero)
 
         holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            // Notifica al fragmento del cambio en el CheckBox
-            clickListener?.onCheckBoxCheckedChange(perro, isChecked)
+          clickListener?.onCheckBoxCheckedChange(perro, isChecked)
         }
     }
 

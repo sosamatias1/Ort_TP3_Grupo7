@@ -49,11 +49,11 @@
             android:id="@+id/raza_perro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:fontFamily="@font/quicksand_regular"
-            android:textColor="@color/white"
             android:text="raza"
+            android:textColor="@color/white"
             android:textSize="18dp"
-            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toTopOf="@id/subraza_perro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nombre_perro"
@@ -71,7 +71,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/imagen_pata_subRaza"
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5">
 
@@ -83,44 +83,81 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
             android:textColor="@color/white"
-            android:text="Edad / Genero"
+            android:text="Edad"
             android:textSize="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
-            app:layout_constraintVertical_bias="0.5">
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintRight_toLeftOf="@id/barra_perro">
 
         </TextView>
         <TextView
-            android:id="@+id/id_perro"
+            android:id="@+id/genero_perro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_bold"
+            android:fontFamily="@font/quicksand"
             android:textColor="@color/white"
-            android:text=""
-            android:textSize="0dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintBottom_toTopOf="@id/raza_perro"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
+            android:text="Genero"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/raza_perro"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintLeft_toRightOf="@id/barra_perro">
+
+        </TextView>
+        <TextView
+            android:id="@+id/barra_perro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:textColor="@color/white"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/raza_perro"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintRight_toLeftOf="@id/genero_perro">
 
         </TextView>
 
-
-
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/favorito_perro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             app:buttonCompat="@drawable/bookmark_selector"
+            app:buttonTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagen_pata_Raza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nombre_perro"
+            app:layout_constraintBottom_toTopOf="@id/subraza_perro"
+            android:paddingLeft="10dp"
+
+            app:srcCompat="@drawable/pata"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/imagen_pata_subRaza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/raza_perro"
+            android:paddingLeft="10dp"
+
+            app:srcCompat="@drawable/pata"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

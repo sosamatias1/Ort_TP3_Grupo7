@@ -21,10 +21,7 @@ class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
         this.view = v
 
     }
-    fun setId(id: Int){
-        val txt: TextView = view.findViewById(R.id.id_perro)
-        txt.text = id.toString()
-    }
+
     fun setNombre(nombre: String) {
         val txt: TextView = view.findViewById(R.id.nombre_perro)
         txt.text = nombre
@@ -53,5 +50,13 @@ class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
         val checkBox1: CheckBox = view.findViewById(R.id.favorito_perro)
         checkBox1.isChecked = favorito
         }
+    fun setEdad(edad: Int) {
+        val txt: TextView = view.findViewById(R.id.edad_perro)
+        txt.text = edad.toString()
+    }
+    fun setGenero(genero: String) {
+        val txt: TextView = view.findViewById(R.id.genero_perro)
+        txt.text = genero
+    }
 
 }

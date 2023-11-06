@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ConfiguracionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SOY UNA CONFIG" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        tools:context=".fragments.ConfiguracionFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_config_general"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/roboto500"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="@string/general_config"
+            android:textColor="@color/general_config"
+            android:textSize="15sp"
+
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_NightMode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/modo_oscuro"
+            android:textColor="@color/nombre_perfil_config"
+            android:textSize="18sp"
+
+
+            />
+    </LinearLayout>
+

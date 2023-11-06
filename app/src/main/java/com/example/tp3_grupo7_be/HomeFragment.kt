@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.holders.PerrosHolder
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
@@ -51,6 +52,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
+
+
 
         return view
     }
@@ -108,18 +111,20 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
 
-        perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false))
-        perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false))
-        perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false))
-        perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false))
-        perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false))
-        perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false))
-        perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false))
+        perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
+        perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
     }
 
 
     }
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
+        // Realiza la actualización en la base de datos desde el fragmento
+        // Asegúrate de usar coroutines si es necesario
         lifecycleScope.launch {
             val filasActualizadas = perroDao?.updateFavoritoPerro(isChecked, perro.id)
             Log.d("Debug", "Filas actualizadas: $filasActualizadas")
