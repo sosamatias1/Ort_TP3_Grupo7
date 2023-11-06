@@ -6,7 +6,8 @@ plugins {
 
 buildscript {
     repositories {
-        google()
+        google();
+
     }
     dependencies {
         val nav_version = "2.5.3"

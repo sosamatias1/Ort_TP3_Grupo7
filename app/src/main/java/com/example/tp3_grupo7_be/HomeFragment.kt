@@ -6,20 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.holders.PerrosHolder
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
+import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class HomeFragment : Fragment(), AdaptadorClickListener {
 
@@ -77,10 +84,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         recyclerView.setHasFixedSize(true)
         listaDePerros = perroDao?.loadAllPerrosNoAdoptados()!!
         adapter = PerrosAdapter(listaDePerros)
+        recyclerView.adapter = adapter
         adapter.setClickListener(this)
         linearLayoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
         recyclerView.layoutManager = linearLayoutManager
 
     }
@@ -101,15 +107,6 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
             }
         }
     }
-
-    fun loadPerroRecycler(){
-        for (i in 1..10) {
-
-            val imagen: String = listaDeImagenes.get(i)
-            listaDePerros.add(Perro("Perro$i", imagen,"Raza$i", "SubRaza$i", true, Perro.Provincias.BUENOS_AIRES.toString(), false))
-        }
-    }
-
     fun cargarDB(){
 
     if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
@@ -122,9 +119,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false))
         perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false))
     }
-        }
 
 
+    }
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
         // Realiza la actualización en la base de datos desde el fragmento
         // Asegúrate de usar coroutines si es necesario
@@ -133,5 +130,11 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
             Log.d("Debug", "Filas actualizadas: $filasActualizadas")
         }
     }
+
+    override fun onViewItemDetail(perro: Perro) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDogDetailFragment(perro)
+        this.findNavController().navigate(action)
+    }
+
 
 }
