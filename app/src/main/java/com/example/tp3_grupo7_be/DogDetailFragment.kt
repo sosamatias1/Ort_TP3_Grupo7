@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.tp3_grupo7_be.models.Perro
 
 
 class DogDetailFragment : Fragment() {
 
     lateinit var v: View
     lateinit var text: TextView
+    lateinit var perro: Perro
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class DogDetailFragment : Fragment() {
         super.onStart()
 
         arguments?.let {
-            val perro = DogDetailFragmentArgs.fromBundle(it).argsDogDetail
+            perro = DogDetailFragmentArgs.fromBundle(it).argsDogDetail
             text.text = perro.nombre
         }
 
@@ -42,9 +44,7 @@ class DogDetailFragment : Fragment() {
         // imageList.add(SlideModel("String Url" or R.drawable)
         // imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
 
-        imageList.add(SlideModel("https://bit.ly/2YoJ77H", "The animal population decreased by 58 percent in 42 years."))
-        imageList.add(SlideModel("https://bit.ly/2BteuF2", "Elephants and tigers may become extinct."))
-        imageList.add(SlideModel("https://bit.ly/3fLJf72", "And people do that."))
+        imageList.add(SlideModel(perro.imagen))
 
         val imageSlider = v.findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)
