@@ -17,9 +17,7 @@
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_person"
-        app:helperText="Required"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
+
         android:hint="Nombre">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -32,9 +30,8 @@
             android:layout_marginTop="10dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/pata"
-            app:helperText="Required"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"
+
+
             android:hint="Nombre mascota">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -48,7 +45,7 @@
             android:layout_marginTop="10dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/ic_calendario"
-            app:helperText="Required"
+
             android:hint="Edad">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -61,7 +58,7 @@
             android:layout_marginTop="10dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/ic_peso"
-            app:helperText="Required"
+
             android:hint="Peso">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -75,7 +72,7 @@
             android:layout_marginTop="10dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/ic_imagen"
-            app:helperText="Required"
+
             android:hint="Imagen">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
