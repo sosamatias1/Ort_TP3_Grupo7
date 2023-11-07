@@ -36,7 +36,7 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
         val perro = list[position]
 
         holder.setNombre(perro.nombre)
-        holder.setImagen(perro.imagen)
+        holder.setImagen(perro.imagen.get(0))
 
         holder.getCardLayout().setOnClickListener{
             clickListener?.onViewItemDetail(perro)

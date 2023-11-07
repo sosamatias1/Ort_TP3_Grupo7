@@ -7,9 +7,11 @@ import androidx.annotation.RequiresApi
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 
 @Entity(tableName = "perros")
-class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, favorito: Boolean?,provincia: String?, adoptado: Boolean?, edad: Int?, genero: String?) :
+class Perro(nombre: String?, imagen: MutableList<String>?, raza: String?, subRaza: String?, favorito: Boolean?,
+            provincia: String?, adoptado: Boolean?, edad: Int?, genero: String?, nombreDuenio: String?, peso: Int) :
     Parcelable {
 
     @PrimaryKey(autoGenerate = true)
@@ -17,8 +19,9 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
     var id : Int
     @ColumnInfo(name = "nombre")
     var nombre: String
+    @TypeConverters(StringListConverter::class)
     @ColumnInfo(name = "imagen")
-    var imagen: String
+    var imagen: MutableList<String>
     @ColumnInfo(name = "raza")
     var raza: String
     @ColumnInfo(name = "subRaza")
@@ -33,11 +36,18 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
     var edad: Int
     @ColumnInfo(name = "genero")
     var genero: String
+    @ColumnInfo(name = "nombreDuenio")
+    var nombreDuenio: String
+    @ColumnInfo(name = "nombreAdoptante")
+    var nombreAdoptante: String?
+
+    @ColumnInfo(name = "peso")
+    var peso: Int
 
     @RequiresApi(Build.VERSION_CODES.Q)
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readString(),
+        parcel.createStringArrayList(),
         parcel.readString(),
         parcel.readString(),
         parcel.readBoolean(),
@@ -45,7 +55,8 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
         parcel.readBoolean(),
         parcel.readInt(),
         parcel.readString(),
-
+        parcel.readString(),
+        parcel.readInt(),
         )
 
     init {
@@ -59,6 +70,9 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
         this.adoptado = adoptado!!
         this.edad = edad!!
         this.genero = genero!!
+        this.nombreDuenio = nombreDuenio!!
+        this.nombreAdoptante = null
+        this.peso=peso!!
     }
     override fun describeContents(): Int {
         return 0
@@ -68,7 +82,7 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
     override fun writeToParcel(parcel: Parcel, p1: Int) {
         parcel.writeInt(id)
         parcel.writeString(nombre)
-        parcel.writeString(imagen)
+        parcel.writeStringList(imagen)
         parcel.writeString(raza)
         parcel.writeString(subRaza)
         parcel.writeBoolean(favorito)
@@ -76,6 +90,9 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
         parcel.writeBoolean(adoptado)
         parcel.writeInt(edad)
         parcel.writeString(genero)
+        parcel.writeString(nombreDuenio)
+        parcel.writeString(nombreAdoptante)
+        parcel.writeInt(peso)
     }
 
     companion object CREATOR : Parcelable.Creator<Perro> {
