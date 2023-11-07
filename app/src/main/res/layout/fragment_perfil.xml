@@ -53,7 +53,6 @@
             android:textAlignment="center"
             android:textColor="@color/subir_foto_txt"
             android:textSize="15sp"
-
             android:textAllCaps="false"
             android:fontFamily="@font/nunito700"/>
 
