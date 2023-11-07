@@ -101,7 +101,6 @@ class Perro(nombre: String?, imagen: String?, raza: String?, subRaza: String?, f
         companion object {
             val MACHO = "Macho"
             val HEMBRA = "Hembra"
-
         }
     }
 }
