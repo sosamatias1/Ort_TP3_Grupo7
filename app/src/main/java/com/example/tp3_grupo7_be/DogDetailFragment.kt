@@ -44,7 +44,7 @@ class DogDetailFragment : Fragment() {
         // imageList.add(SlideModel("String Url" or R.drawable)
         // imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
 
-        imageList.add(SlideModel(perro.imagen))
+        imageList.add(SlideModel(perro.imagen[0]))
 
         val imageSlider = v.findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)
