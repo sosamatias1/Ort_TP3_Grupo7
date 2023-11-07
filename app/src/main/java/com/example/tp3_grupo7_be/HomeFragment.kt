@@ -15,19 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
-import com.example.tp3_grupo7_be.holders.PerrosHolder
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
-import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment(), AdaptadorClickListener {
@@ -144,16 +139,36 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         }
     }
     fun cargarDB(){
-
     if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
+        var lista1: MutableList<String> = ArrayList()
+        var lista2: MutableList<String> = ArrayList()
+        var lista3: MutableList<String> = ArrayList()
+        var lista4: MutableList<String> = ArrayList()
+        var lista5: MutableList<String> = ArrayList()
+        var lista6: MutableList<String> = ArrayList()
+        var lista7: MutableList<String> = ArrayList()
 
-        perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
+        lista1.add("https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg")
+        lista1.add("https://images.dog.ceo/breeds/terrier-wheaten/clementine.jpg")
+        lista2.add("https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg")
+        lista2.add("https://images.dog.ceo/breeds/terrier-bedlington/n02093647_1022.jpg")
+        lista3.add("https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg")
+        lista3.add("https://images.dog.ceo/breeds/akita/512px-Ainu-Dog.jpg")
+        lista4.add("https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg")
+        lista4.add("https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1024.jpg")
+        lista5.add("https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg")
+        lista6.add("https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg")
+        lista7.add("https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg")
+
+        perroDao?.insertPerro(Perro("Perro1", lista1, "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño1", 20))
+        perroDao?.insertPerro(Perro("Perro2", lista2, "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño2", 20))
+        perroDao?.insertPerro(Perro("Perro3", lista3, "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO, "Dueño3", 20))
+        perroDao?.insertPerro(Perro("Perro4", lista4, "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO, "Dueño4", 20))
+        perroDao?.insertPerro(Perro("Perro5", lista5, "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO, "Dueño5", 20))
+        perroDao?.insertPerro(Perro("Perro6", lista6, "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO, "Dueño6", 20))
+        perroDao?.insertPerro(Perro("Perro7", lista7, "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño7", 20))
+        perroDao?.insertPerro(Perro("Perro8", lista6, "Raza8", "SubRaza8", false, Perro.Provincias.SANTA_FE, true, 3, Perro.Generos.MACHO, "Dueño8", 20))
+        perroDao?.insertPerro(Perro("Perro9", lista7, "Raza9", "SubRaza9", false, Perro.Provincias.BUENOS_AIRES, true, 3, Perro.Generos.MACHO, "Dueño9", 20))
     }
 
 
