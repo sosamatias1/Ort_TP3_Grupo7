@@ -129,21 +129,23 @@ class Perro(
             return arrayOfNulls(size)
         }
     }
-
-    class Provincias {
-        companion object {
-            val BUENOS_AIRES = "Buenos Aires"
-            val CORDOBA = "Cordoba"
-            val SANTA_FE = "Santa Fe"
-        }
+    enum class Provincias(val provincia: String) {
+        BUENOS_AIRES("Buenos Aires"),
+        CORDOBA("Cordoba"),
+        SANTA_FE("Santa Fe")
     }
 
-    class Generos {
-        companion object {
-            val MACHO = "Macho"
-            val HEMBRA = "Hembra"
-        }
+    fun getProvinciasList(): List<String> {
+        return Provincias.values().map { it.provincia }
     }
 
+    enum class Generos(val genero: String) {
+        MACHO("Macho"),
+        HEMBRA("Hembra")
+    }
+
+    fun getGenerosList(): List<String> {
+        return Generos.values().map { it.genero }
+    }
 
 }
