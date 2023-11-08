@@ -48,11 +48,13 @@ class DogDetailFragment : Fragment() {
             edadPerro.text = perro.edad.toString()
             provinciaPerro.text = perro.provincia
             generoPerro.text = perro.genero
-            //pesoPerro.text = perro.peso
+            pesoPerro.text = perro.peso.toString()
         }
 
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(perro.imagen))
+        for (i in 0..<perro.imagen.size) {
+            imageList.add(SlideModel(perro.imagen[i]))
+        }
 
         val imageSlider = v.findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)

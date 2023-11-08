@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
 
             if (fragmentId == R.id.dogDetailFragment) {
                 bottomNavigationView.visibility = View.GONE
+            } else{
+                bottomNavigationView.visibility = View.VISIBLE
             }
         }
     }
