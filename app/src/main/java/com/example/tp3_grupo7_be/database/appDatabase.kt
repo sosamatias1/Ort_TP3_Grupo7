@@ -4,9 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.tp3_grupo7_be.models.Perro
+import com.example.tp3_grupo7_be.models.StringListConverter
 
-@Database(entities = [Perro::class], version = 4, exportSchema = false)
+@Database(entities = [Perro::class], version = 3, exportSchema = false)
+@TypeConverters(StringListConverter::class)
 abstract class appDatabase : RoomDatabase() {
     abstract fun perroDao(): perroDao
 

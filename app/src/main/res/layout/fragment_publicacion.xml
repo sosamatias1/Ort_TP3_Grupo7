@@ -1,14 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PublicacionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="publicacion" />
+        android:layout_marginBottom="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nombre_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Nombre mascota"
+
+
+                app:startIconDrawable="@drawable/pata">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nombre_perro_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Raza"
+                app:startIconDrawable="@drawable/pata">
+
+                <AutoCompleteTextView
+                    android:id="@+id/ac_raza_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none">
+
+                </AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Edad"
+
+                app:startIconDrawable="@drawable/ic_calendario">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edad_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Peso"
+
+                app:startIconDrawable="@drawable/ic_peso">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/peso_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Imagen"
+
+                app:startIconDrawable="@drawable/ic_imagen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/imagen_publicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/provincia_publicacion"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="176dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+                    android:hint="Localidad"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_ubicacion">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ac_ubicacion_publicacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none">
+
+                    </AutoCompleteTextView>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/genero_publicacion"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="Genero"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/provincia_publicacion"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_gender">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ac_genero_publicacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none">
+
+                    </AutoCompleteTextView>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/cargar_publicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+                android:text="Cargar mascota" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

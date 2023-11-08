@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
-import com.example.tp3_grupo7_be.holders.PerrosHolder
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
@@ -24,7 +23,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 
@@ -35,6 +33,27 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     lateinit var linearLayoutManager: LinearLayoutManager
     var listaDePerros: MutableList<Perro> = ArrayList()
     var listaDeImagenes: MutableList<String> = ArrayList()
+    lateinit var listaDeRazas: Map<String, MutableList<String>>
+
+    private val razas: List<String> = listOf(
+        "terrier", "terrier", "akita", "retriever", "rottweiler",
+        "stbernard", "corgi", "beagle", "husky", "retriever"
+    )
+
+    private val subrazas: List<String?> = listOf(
+        "wheaten", "bedlington", null, "chesapeake", null,
+        null, "cardigan", null, null, "golden"
+    )
+
+    private val nombresDuenios: List<String?> = listOf(
+        "Carlos","Martina","Diego","Valentina","Juan",
+        "Sofía","Camila","Francisco","Jorge","Matías"
+    )
+
+    private val nombres: List<String?> = listOf(
+        "Pancho", "Negra", "Toto", "Lulu", "Cachito",
+        "Sultan", "Rocco", "Leia", "Jorge Junior", "Roman"
+    )
 
 
     private var db: appDatabase? = null
@@ -61,7 +80,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     override fun onStart() {
         super.onStart()
-        val resultado = loadImagenes()
+        val resultado = loadImagenes("retriever", "golden")
         lifecycleScope.launch {
             resultado.await()
             cargarDB()
@@ -75,10 +94,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         perroDao = db?.perroDao()
 
 
-
     }
 
-    fun initRecyclerView(){
+    fun initRecyclerView() {
 
         requireActivity()
         recyclerView.setHasFixedSize(true)
@@ -91,37 +109,62 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     }
 
-    fun loadImagenes(): Deferred<Unit> {
+    fun loadImagenes(raza: String, subraza: String?): Deferred<Unit> {
         val service = ActivityServiceApiBuilder.create()
 
         return GlobalScope.async(Dispatchers.IO) {
-            val response = service.getImagenes().execute()
+            var response: Response<ImagenPerroRespuesta>
+
+            if (subraza != null) {
+                response = service.getImagenes(raza, subraza).execute()
+
+            } else {
+                response = service.getImagenes(raza).execute()
+            }
 
             if (response.isSuccessful) {
                 val responseImagenes = response.body()
                 val imagenes = responseImagenes?.imagenes ?: emptyList()
                 listaDeImagenes.clear()
-                listaDeImagenes.addAll(imagenes)
+                for (i in 1..4) {
+
+                    listaDeImagenes.add(imagenes[i])
+                }
+
             } else {
                 println("Error con el loadImagenes")
             }
         }
     }
-    fun cargarDB(){
 
-    if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
 
-        perroDao?.insertPerro(Perro("Perro1", "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg", "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro2", "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg", "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro3", "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg", "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro4", "https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg", "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro5", "https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg", "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro6", "https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg", "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO))
-        perroDao?.insertPerro(Perro("Perro7", "https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg", "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO))
+    suspend fun cargarDB() {
+        if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()) {
+            var razaTemporal: String
+            var subrazaTemporal: String?
+
+            for (i in 0..9) {
+                razaTemporal = razas.get(i)
+                subrazaTemporal = subrazas.get(i)
+                loadImagenes(razaTemporal, subrazaTemporal).await()
+
+                perroDao?.insertPerro(
+                    Perro(
+                        nombres.get(i),
+                        listaDeImagenes,
+                        razaTemporal,
+                        subrazaTemporal,
+                        Perro.Provincias.values().random().provincia,
+                        3,
+                        Perro.Generos.values().random().genero,
+                        nombresDuenios.get(i),
+                        20
+                    )
+                )
+            }
+        }
     }
 
-
-    }
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
         // Realiza la actualización en la base de datos desde el fragmento
         // Asegúrate de usar coroutines si es necesario
