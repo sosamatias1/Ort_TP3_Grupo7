@@ -1,6 +1,7 @@
 package com.example.tp3_grupo7_be.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -40,9 +41,7 @@ class MainActivity : AppCompatActivity() {
         setBottomNavBar()
         setDrawerMenu()
         onDestinationChangedListener()
-
         NavigationUI.setupWithNavController(navigationView, navController)
-
     }
 
     private fun setNavHostFragment() {
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
                 toggle.setHomeAsUpIndicator(drawerIcon)
             }
-            if (fragmentId == R.id.dogDetailFragment) {
+            if (fragmentId == R.id.dogDetailFragment || fragmentId == R.id.publicacionFragment) {
                 bottomNavigationView.visibility = View.GONE
             } else{
                 bottomNavigationView.visibility = View.VISIBLE
