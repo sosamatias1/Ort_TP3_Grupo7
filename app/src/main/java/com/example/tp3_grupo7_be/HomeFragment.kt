@@ -148,9 +148,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza1,
                     subraza1,
-                    Perro.Provincias.BUENOS_AIRES,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño1",
                     20
                 )
@@ -163,10 +163,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     raza2,
                     subraza2,
 
-                    Perro.Provincias.BUENOS_AIRES,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
 
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño2",
                     20
                 )
@@ -179,10 +179,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     raza3,
                     subraza3,
 
-                    Perro.Provincias.CORDOBA,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
 
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño3",
                     20
                 )
@@ -195,10 +195,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     raza4,
                     subraza4,
 
-                    Perro.Provincias.CORDOBA,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
 
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño4",
                     20
                 )
@@ -211,10 +211,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     raza5,
                     subraza5,
 
-                    Perro.Provincias.SANTA_FE,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
 
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño5",
                     20
                 )
@@ -226,9 +226,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza6,
                     subraza6,
-                    Perro.Provincias.SANTA_FE,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño6",
                     20
                 )
@@ -240,9 +240,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza7,
                     subraza7,
-                    Perro.Provincias.BUENOS_AIRES,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño7",
                     20
                 )
@@ -254,9 +254,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza8,
                     subraza8,
-                    Perro.Provincias.SANTA_FE,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño8",
                     20
                 )
@@ -268,9 +268,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza9,
                     subraza9,
-                    Perro.Provincias.BUENOS_AIRES,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño9",
                     20
                 )
@@ -282,9 +282,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                     listaDeImagenes,
                     raza10,
                     subraza10,
-                    Perro.Provincias.BUENOS_AIRES,
+                    Perro.Provincias.BUENOS_AIRES.provincia,
                     3,
-                    Perro.Generos.MACHO,
+                    Perro.Generos.MACHO.genero,
                     "Dueño10",
                     20
                 )

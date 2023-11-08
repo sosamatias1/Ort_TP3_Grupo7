@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 interface PerroService {
     @GET("api/breeds/list/all")
-    fun getRazas(): Call<ImagenPerroRespuesta>
+    fun getRazas(): Call<RazaPerroRespuesta>
 
     @GET("api/breed/{raza}/images")
     fun getImagenes(@Path("raza") raza: String): Call<ImagenPerroRespuesta>
