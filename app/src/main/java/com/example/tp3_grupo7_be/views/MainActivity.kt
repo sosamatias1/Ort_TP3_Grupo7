@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
                 toggle.setHomeAsUpIndicator(drawerIcon)
             }
-            if (fragmentId == R.id.dogDetailFragment || fragmentId == R.id.publicacionFragment) {
+            if (fragmentId == R.id.dogDetailFragment) {
                 bottomNavigationView.visibility = View.GONE
             } else{
                 bottomNavigationView.visibility = View.VISIBLE
