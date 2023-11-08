@@ -18,7 +18,7 @@
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
             android:layout_width="wrap_content"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             app:iss_auto_cycle="true"
             app:iss_delay="1000"
             app:iss_period="1000"
@@ -177,7 +177,7 @@
                     android:id="@+id/tv_duenio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto400"
+                    android:fontFamily="@font/poppins_extralight"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:text="@string/duenio"
@@ -187,25 +187,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/nombre_perfil_config"
-                    android:fontFamily="@font/quicksand_bold"
+                    android:fontFamily="@font/poppins"
                     android:textSize="20sp"
                     android:text="Fran" />
             </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/duenio_layout_phone"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="200dp"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baseline_chat_bubble_24"
+                android:src="@drawable/round_call_24"
                 app:shapeAppearanceOverlay="@style/perfil_circular"
                 tools:srcCompat="@tools:sample/avatars">
-
             </com.google.android.material.imageview.ShapeableImageView>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem"
+            android:fontFamily="@font/poppins_extralight"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"></TextView>
     </LinearLayout>
+    
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/adoptar_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/duenio_layout"
+        android:text="@string/adoptar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cornerRadius="8dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

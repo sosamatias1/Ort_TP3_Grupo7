@@ -10,4 +10,6 @@
     <string name="general_config">Generales</string>
     <string name="modo_oscuro">Modo Oscuro</string>
     <string name="duenio">Dueño</string>
+    <string name="adoptar">Adoptar</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>
