@@ -1,6 +1,6 @@
 package com.example.tp3_grupo7_be
 
-import android.content.ClipData.Item
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -104,6 +104,11 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
 
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        clearSearchViewText()
     }
 
 
@@ -216,5 +221,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         this.findNavController().navigate(action)
     }
 
+    private fun clearSearchViewText() {
+        searchView.setQuery("", false)
+    }
 
 }
