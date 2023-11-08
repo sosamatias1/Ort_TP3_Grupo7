@@ -18,11 +18,14 @@ import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
+import com.example.tp3_grupo7_be.service.ImagenPerroRespuesta
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
 
 
 class HomeFragment : Fragment(), AdaptadorClickListener {
@@ -33,6 +36,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     private lateinit var searchView: SearchView
     var listaDePerros: MutableList<Perro> = ArrayList()
     var listaDeImagenes: MutableList<String> = ArrayList()
+    lateinit var listaDeRazas: Map<String, MutableList<String>>
 
 
 
@@ -63,7 +67,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     override fun onStart() {
         super.onStart()
-        val resultado = loadImagenes()
+        val resultado = loadImagenes("retriever", "golden")
         lifecycleScope.launch {
 
             resultado.await()
@@ -122,57 +126,211 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     }
 
-    fun loadImagenes(): Deferred<Unit> {
+    fun loadImagenes(raza: String, subraza: String?): Deferred<Unit> {
         val service = ActivityServiceApiBuilder.create()
 
         return GlobalScope.async(Dispatchers.IO) {
-            val response = service.getImagenes().execute()
+            var response: Response<ImagenPerroRespuesta>
+
+            if (subraza != null) {
+                response = service.getImagenes(raza, subraza).execute()
+
+            } else {
+                response = service.getImagenes(raza).execute()
+            }
 
             if (response.isSuccessful) {
                 val responseImagenes = response.body()
                 val imagenes = responseImagenes?.imagenes ?: emptyList()
                 listaDeImagenes.clear()
-                listaDeImagenes.addAll(imagenes)
+                for (i in 1 .. 4){
+
+                listaDeImagenes.add(imagenes[i])
+                }
+
             } else {
                 println("Error con el loadImagenes")
             }
         }
     }
-    fun cargarDB(){
-    if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()){
-        var lista1: MutableList<String> = ArrayList()
-        var lista2: MutableList<String> = ArrayList()
-        var lista3: MutableList<String> = ArrayList()
-        var lista4: MutableList<String> = ArrayList()
-        var lista5: MutableList<String> = ArrayList()
-        var lista6: MutableList<String> = ArrayList()
-        var lista7: MutableList<String> = ArrayList()
 
-        lista1.add("https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2945.jpg")
-        lista1.add("https://images.dog.ceo/breeds/terrier-wheaten/clementine.jpg")
-        lista2.add("https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3215.jpg")
-        lista2.add("https://images.dog.ceo/breeds/terrier-bedlington/n02093647_1022.jpg")
-        lista3.add("https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg")
-        lista3.add("https://images.dog.ceo/breeds/akita/512px-Ainu-Dog.jpg")
-        lista4.add("https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1523.jpg")
-        lista4.add("https://images.dog.ceo/breeds/retriever-chesapeake/n02099849_1024.jpg")
-        lista5.add("https://images.dog.ceo/breeds/rottweiler/n02106550_4987.jpg")
-        lista6.add("https://images.dog.ceo/breeds/stbernard/n02109525_5013.jpg")
-        lista7.add("https://images.dog.ceo/breeds/corgi-cardigan/n02113186_8794.jpg")
 
-        perroDao?.insertPerro(Perro("Perro1", lista1, "Raza1", "SubRaza1", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño1", 20))
-        perroDao?.insertPerro(Perro("Perro2", lista2, "Raza2", "SubRaza2", true, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño2", 20))
-        perroDao?.insertPerro(Perro("Perro3", lista3, "Raza3", "SubRaza3", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO, "Dueño3", 20))
-        perroDao?.insertPerro(Perro("Perro4", lista4, "Raza4", "SubRaza4", false, Perro.Provincias.CORDOBA, false, 3, Perro.Generos.MACHO, "Dueño4", 20))
-        perroDao?.insertPerro(Perro("Perro5", lista5, "Raza5", "SubRaza5", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO, "Dueño5", 20))
-        perroDao?.insertPerro(Perro("Perro6", lista6, "Raza6", "SubRaza6", false, Perro.Provincias.SANTA_FE, false, 3, Perro.Generos.MACHO, "Dueño6", 20))
-        perroDao?.insertPerro(Perro("Perro7", lista7, "Raza7", "SubRaza7", false, Perro.Provincias.BUENOS_AIRES, false, 3, Perro.Generos.MACHO, "Dueño7", 20))
-        perroDao?.insertPerro(Perro("Perro8", lista6, "Raza8", "SubRaza8", false, Perro.Provincias.SANTA_FE, true, 3, Perro.Generos.MACHO, "Dueño8", 20))
-        perroDao?.insertPerro(Perro("Perro9", lista7, "Raza9", "SubRaza9", false, Perro.Provincias.BUENOS_AIRES, true, 3, Perro.Generos.MACHO, "Dueño9", 20))
+    suspend fun cargarDB() {
+        if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()) {
+            var raza1 = "terrier";
+            var subraza1= "wheaten"
+            var raza2 = "terrier";
+            var subraza2= "bedlington"
+            var raza3= "akita"
+            var subraza3= null
+            var raza4 = "retriever";
+            var subraza4= "chesapeake"
+            var raza5 = "rottweiler";
+            var subraza5= null
+            var raza6 = "stbernard";
+            var subraza6= null
+            var raza7 = "corgi";
+            var subraza7= "cardigan"
+            var raza8 = "beagle";
+            var subraza8= null
+            var raza9 = "husky";
+            var subraza9= null
+            var raza10 = "retriever";
+            var subraza10= "golden"
+
+            loadImagenes(raza1, subraza1).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro1",
+                    listaDeImagenes,
+                    raza1,
+                    subraza1,
+                    Perro.Provincias.BUENOS_AIRES,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño1",
+                    20
+                )
+            )
+            loadImagenes(raza2, subraza2).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro2",
+                    listaDeImagenes,
+                    raza2,
+                    subraza2,
+
+                    Perro.Provincias.BUENOS_AIRES,
+
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño2",
+                    20
+                )
+            )
+            loadImagenes(raza3, subraza3).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro3",
+                    listaDeImagenes,
+                    raza3,
+                    subraza3,
+
+                    Perro.Provincias.CORDOBA,
+
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño3",
+                    20
+                )
+            )
+            loadImagenes(raza4, subraza4).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro4",
+                    listaDeImagenes,
+                    raza4,
+                    subraza4,
+
+                    Perro.Provincias.CORDOBA,
+
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño4",
+                    20
+                )
+            )
+            loadImagenes(raza5, subraza5).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro5",
+                    listaDeImagenes,
+                    raza5,
+                    subraza5,
+
+                    Perro.Provincias.SANTA_FE,
+
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño5",
+                    20
+                )
+            )
+            loadImagenes(raza6, subraza6).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro6",
+                    listaDeImagenes,
+                    raza6,
+                    subraza6,
+                    Perro.Provincias.SANTA_FE,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño6",
+                    20
+                )
+            )
+            loadImagenes(raza7, subraza7).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro7",
+                    listaDeImagenes,
+                    raza7,
+                    subraza7,
+                    Perro.Provincias.BUENOS_AIRES,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño7",
+                    20
+                )
+            )
+            loadImagenes(raza8, subraza8).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro8",
+                    listaDeImagenes,
+                    raza8,
+                    subraza8,
+                    Perro.Provincias.SANTA_FE,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño8",
+                    20
+                )
+            )
+            loadImagenes(raza9, subraza9).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro9",
+                    listaDeImagenes,
+                    raza9,
+                    subraza9,
+                    Perro.Provincias.BUENOS_AIRES,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño9",
+                    20
+                )
+            )
+            loadImagenes(raza10, subraza10).await()
+            perroDao?.insertPerro(
+                Perro(
+                    "Perro10",
+                    listaDeImagenes,
+                    raza10,
+                    subraza10,
+                    Perro.Provincias.BUENOS_AIRES,
+                    3,
+                    Perro.Generos.MACHO,
+                    "Dueño10",
+                    20
+                )
+            )
+        }
+
+
     }
 
-
-    }
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
         // Realiza la actualización en la base de datos desde el fragmento
         // Asegúrate de usar coroutines si es necesario

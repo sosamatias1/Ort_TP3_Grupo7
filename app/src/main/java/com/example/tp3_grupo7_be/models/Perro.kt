@@ -10,34 +10,54 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 
 @Entity(tableName = "perros")
-class Perro(nombre: String?, imagen: MutableList<String>?, raza: String?, subRaza: String?, favorito: Boolean?,
-            provincia: String?, adoptado: Boolean?, edad: Int?, genero: String?, nombreDuenio: String?, peso: Int) :
+class Perro(
+    nombre: String?,
+    imagen: MutableList<String>?,
+    raza: String?,
+    subRaza: String?,
+    provincia: String?,
+    edad: Int?,
+    genero: String?,
+    nombreDuenio: String?,
+    peso: Int
+) :
     Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id : Int
+    var id: Int
+
     @ColumnInfo(name = "nombre")
     var nombre: String
+
     @TypeConverters(StringListConverter::class)
     @ColumnInfo(name = "imagen")
     var imagen: MutableList<String>
+
     @ColumnInfo(name = "raza")
     var raza: String
+
     @ColumnInfo(name = "subRaza")
     var subRaza: String
+
     @ColumnInfo(name = "favorito")
     var favorito: Boolean
+
     @ColumnInfo(name = "provincia")
     var provincia: String
+
     @ColumnInfo(name = "adoptado")
     var adoptado: Boolean
+
     @ColumnInfo(name = "edad")
     var edad: Int
+
     @ColumnInfo(name = "genero")
     var genero: String
+
     @ColumnInfo(name = "nombreDuenio")
     var nombreDuenio: String
+
     @ColumnInfo(name = "nombreAdoptante")
     var nombreAdoptante: String?
 
@@ -50,30 +70,34 @@ class Perro(nombre: String?, imagen: MutableList<String>?, raza: String?, subRaz
         parcel.createStringArrayList(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readBoolean(),
         parcel.readString(),
-        parcel.readBoolean(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
-        )
+    )
 
     init {
         this.id = 0
         this.nombre = nombre!!
         this.imagen = imagen!!
-        this.raza = raza!!
-        this.subRaza = subRaza!!
-        this.favorito = favorito!!
+        this.raza = raza!!.replaceFirstChar { it.uppercaseChar() }
+        if (subRaza == null) {
+
+            this.subRaza = "Sin subraza"
+        } else {
+            this.subRaza = subRaza!!.replaceFirstChar { it.uppercaseChar() }
+        }
+        this.favorito = false
         this.provincia = provincia!!
-        this.adoptado = adoptado!!
+        this.adoptado = false
         this.edad = edad!!
         this.genero = genero!!
         this.nombreDuenio = nombreDuenio!!
         this.nombreAdoptante = null
-        this.peso=peso!!
+        this.peso = peso!!
     }
+
     override fun describeContents(): Int {
         return 0
     }
