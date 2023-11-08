@@ -1,15 +1,22 @@
 package com.example.tp3_grupo7_be
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.tp3_grupo7_be.database.appDatabase
+import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.service.ActivityServiceApiBuilder
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -30,9 +37,23 @@ class PublicacionFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    //Componentes
     lateinit var acRazas: AutoCompleteTextView
     lateinit var acProvincias: AutoCompleteTextView
     lateinit var acGeneros: AutoCompleteTextView
+    lateinit var tiNombreDuenio: TextInputEditText
+    lateinit var tiNombrePerro: TextInputEditText
+    lateinit var tiEdad: TextInputEditText
+    lateinit var tiPeso: TextInputEditText
+    lateinit var tiImagen: TextInputEditText
+    lateinit var btnCargar: Button
+
+    // Room
+    private var db: appDatabase? = null
+    private var perroDao: perroDao? = null
+
+    //Datos
     var razas: MutableList<String> = ArrayList()
     var provincias: MutableList<String> = ArrayList()
     var generos: MutableList<String> = ArrayList()
@@ -54,6 +75,13 @@ class PublicacionFragment : Fragment() {
         acRazas = v.findViewById(R.id.ac_raza_publicacion)
         acProvincias = v.findViewById(R.id.ac_ubicacion_publicacion)
         acGeneros = v.findViewById(R.id.ac_genero_publicacion)
+        tiNombreDuenio = v.findViewById(R.id.nombre_publicacion)
+        tiNombrePerro = v.findViewById(R.id.nombre_perro_publicacion)
+        tiEdad = v.findViewById(R.id.edad_publicacion)
+        tiPeso = v.findViewById(R.id.peso_publicacion)
+        tiImagen = v.findViewById(R.id.imagen_publicacion)
+        btnCargar = v.findViewById(R.id.cargar_publicacion)
+        setupButton()
         return v
     }
 
@@ -67,9 +95,59 @@ class PublicacionFragment : Fragment() {
         cargarRazasAC()
         cargarProvinciasAC()
         cargarGenerosAC()
+        val context = view?.context
+        if (context != null) {
+            db = appDatabase.getAppDataBase(context)
+        }
+        perroDao = db?.perroDao()
+
 
 
     }
+
+    fun setupButton(){
+        btnCargar.setOnClickListener{ sendDataToServer()}
+    }
+
+    private fun sendDataToServer() {
+       try {
+
+        val nombrePerro = tiNombrePerro.text.toString()!!
+        val nombreDuenio = tiNombreDuenio.text.toString()!!
+        val edad = tiEdad.text.toString()!!
+        val peso = tiPeso.text.toString()!!
+        val imagenes: MutableList<String> = ArrayList()
+        val imagen = tiImagen.text.toString()!!
+        imagenes.add(imagen)
+        val provincia = acProvincias.text.toString()!!
+        val genero= acGeneros.text.toString()!!
+        val razaCompleta= acRazas.text.toString().split('-')!!
+        val raza = razaCompleta.get(0)!!
+        val subraza = razaCompleta.get(1)
+        perroDao?.insertPerro(
+            Perro(
+                nombrePerro,
+                imagenes,
+                raza,
+                subraza,
+                provincia,
+                edad.toInt(),
+                genero,
+                nombreDuenio,
+                peso.toInt()
+            )
+        )
+           Toast.makeText(context, "La publicacion se cargo con exito", Toast.LENGTH_LONG).show()
+
+           val action = PublicacionFragmentDirections.actionPublicacionFragmentToHomeFragment()
+           this.findNavController().navigate(action)
+       }catch (error: Error){
+           Log.e("error", error.message.toString())
+       }
+
+    }
+
+
 
 
     fun cargarProvinciasAC(){
