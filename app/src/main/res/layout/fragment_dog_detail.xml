@@ -144,17 +144,68 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/layout_duenio"
+    <LinearLayout
+        android:id="@+id/duenio_layout"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/bottom_dialog_constraint">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/duenio_layout_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pancreas"
+                app:shapeAppearanceOverlay="@style/perfil_circular"
+                tools:srcCompat="@tools:sample/avatars" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="15dp"
+                >
+                <TextView
+                    android:id="@+id/tv_duenio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto400"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:text="@string/duenio"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/tv_detail_duenio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/nombre_perfil_config"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:textSize="20sp"
+                    android:text="Fran" />
+            </LinearLayout>
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/duenio_layout_phone"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="200dp"
+                android:layout_gravity="right"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_chat_bubble_24"
+                app:shapeAppearanceOverlay="@style/perfil_circular"
+                tools:srcCompat="@tools:sample/avatars">
 
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.imageview.ShapeableImageView>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
