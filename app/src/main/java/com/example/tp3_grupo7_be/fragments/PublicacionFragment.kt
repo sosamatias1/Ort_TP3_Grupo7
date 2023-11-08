@@ -1,4 +1,4 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.models.Perro
@@ -122,7 +123,8 @@ class PublicacionFragment : Fragment() {
         )
            Toast.makeText(context, "La publicacion se cargo con exito", Toast.LENGTH_LONG).show()
 
-           val action = PublicacionFragmentDirections.actionPublicacionFragmentToHomeFragment()
+           val action =
+               PublicacionFragmentDirections.actionPublicacionFragmentToHomeFragment()
            this.findNavController().navigate(action)
        }catch (error: Error){
            Log.e("error", error.message.toString())

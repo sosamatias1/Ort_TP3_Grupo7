@@ -1,4 +1,6 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
+
+import com.example.tp3_grupo7_be.R
 
 object FragmentTitles {
     val titlesMap: Map<Int, String> = mapOf(

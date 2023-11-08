@@ -1,7 +1,6 @@
 package com.example.tp3_grupo7_be.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,8 +15,7 @@ import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import com.example.tp3_grupo7_be.FragmentTitles
+import com.example.tp3_grupo7_be.fragments.FragmentTitles
 import com.example.tp3_grupo7_be.fragments.PerfilFragment
 import com.example.tp3_grupo7_be.fragments.ConfiguracionFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

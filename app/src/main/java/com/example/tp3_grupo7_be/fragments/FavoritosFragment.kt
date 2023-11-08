@@ -1,4 +1,4 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
@@ -78,7 +79,10 @@ class FavoritosFragment : Fragment(), AdaptadorClickListener {
     }
 
     override fun onViewItemDetail(perro: Perro) {
-        val action = FavoritosFragmentDirections.actionFavoritosFragmentToDogDetailFragment(perro)
+        val action =
+            FavoritosFragmentDirections.actionFavoritosFragmentToDogDetailFragment(
+                perro
+            )
         this.findNavController().navigate(action)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.models.Perro
@@ -43,7 +44,7 @@ class DogDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_dog_detail, container, false)
+        v = inflater.inflate(R.layout.fragment_detalle_perro, container, false)
         nombrePerro = v.findViewById(R.id.dogDetail_name)
         edadPerro = v.findViewById(R.id.dogDetail_age)
         provinciaPerro = v.findViewById(R.id.dogDetail_provincia)
@@ -93,7 +94,8 @@ class DogDetailFragment : Fragment() {
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
                 Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
             }
-                val action = DogDetailFragmentDirections.actionDogDetailFragmentToAdopcionFragment()
+                val action =
+                    DogDetailFragmentDirections.actionDogDetailFragmentToAdopcionFragment()
                 this.findNavController().navigate(action)
             } catch(e: Error) {
                 Toast.makeText(context, "No se pudo completar la solicitud de adopción", Toast.LENGTH_SHORT).show()

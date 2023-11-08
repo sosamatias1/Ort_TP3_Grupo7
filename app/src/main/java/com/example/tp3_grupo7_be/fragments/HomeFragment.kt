@@ -1,4 +1,4 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
@@ -22,7 +23,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Call
 import retrofit2.Response
 
 
@@ -167,7 +167,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     }
 
     override fun onViewItemDetail(perro: Perro) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDogDetailFragment(perro)
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToDogDetailFragment(
+                perro
+            )
         this.findNavController().navigate(action)
     }
 

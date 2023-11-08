@@ -1,4 +1,4 @@
-package com.example.tp3_grupo7_be
+package com.example.tp3_grupo7_be.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
