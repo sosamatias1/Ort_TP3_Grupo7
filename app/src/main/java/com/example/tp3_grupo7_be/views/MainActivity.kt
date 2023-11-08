@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             val title = FragmentTitles.getTitleForFragment(fragmentId)
             val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
             toolbarTitle.text = title
-
             if (fragmentId == R.id.profile || fragmentId == R.id.settings) {
                 val backIcon = ContextCompat.getDrawable(this, R.drawable.back_icon)
 
@@ -73,7 +72,6 @@ class MainActivity : AppCompatActivity() {
                 val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
                 toggle.setHomeAsUpIndicator(drawerIcon)
             }
-
             if (fragmentId == R.id.dogDetailFragment) {
                 bottomNavigationView.visibility = View.GONE
             } else{
