@@ -61,7 +61,6 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -71,8 +70,6 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
-
-
 
         return view
     }
@@ -114,23 +111,18 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
         return GlobalScope.async(Dispatchers.IO) {
             var response: Response<ImagenPerroRespuesta>
-
             if (subraza != null) {
                 response = service.getImagenes(raza, subraza).execute()
-
             } else {
                 response = service.getImagenes(raza).execute()
             }
-
             if (response.isSuccessful) {
                 val responseImagenes = response.body()
                 val imagenes = responseImagenes?.imagenes ?: emptyList()
                 listaDeImagenes.clear()
                 for (i in 1..4) {
-
                     listaDeImagenes.add(imagenes[i])
                 }
-
             } else {
                 println("Error con el loadImagenes")
             }

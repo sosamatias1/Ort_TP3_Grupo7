@@ -1,6 +1,7 @@
 package com.example.tp3_grupo7_be.views
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,7 @@ import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import com.example.tp3_grupo7_be.FragmentTitles
 import com.example.tp3_grupo7_be.fragments.PerfilFragment
 import com.example.tp3_grupo7_be.fragments.ConfiguracionFragment
@@ -28,10 +30,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
     private lateinit var toolbar: Toolbar
+    private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         setNavHostFragment()
         setToolbar()
@@ -46,14 +48,12 @@ class MainActivity : AppCompatActivity() {
     private fun setNavHostFragment() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-
         navigationView = findViewById(R.id.nav_view)
-
         navController = navHostFragment.navController
     }
 
     private fun setToolbar() {
-        toolbar= findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             val title = FragmentTitles.getTitleForFragment(fragmentId)
             val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
             toolbarTitle.text = title
-
             if (fragmentId == R.id.profile || fragmentId == R.id.settings) {
                 val backIcon = ContextCompat.getDrawable(this, R.drawable.back_icon)
 
@@ -73,36 +72,31 @@ class MainActivity : AppCompatActivity() {
                 val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
                 toggle.setHomeAsUpIndicator(drawerIcon)
             }
+            if (fragmentId == R.id.dogDetailFragment) {
+                bottomNavigationView.visibility = View.GONE
+            } else{
+                bottomNavigationView.visibility = View.VISIBLE
+            }
         }
     }
+
     fun setBottomNavBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_bar)
-
-
+        bottomNavigationView = findViewById(R.id.bottom_bar)
         //Desabilitar Shifting para que muestre más de 3 items
         bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
         bottomNavigationView.itemBackground = null
         val menu = bottomNavigationView.menu
         menu.clear()
         menuInflater.inflate(R.menu.bottom_menu, menu)
-
-        //Navegación
-        //  val navHostFragment =
-        //     supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        // val navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
     }
 
     private fun setDrawerMenu() {
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
-
         toggle =
             ActionBarDrawerToggle(this, drawer, R.string.nav_drawer_open, R.string.nav_drawer_close)
-
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-
-
         val drawerIcon = ContextCompat.getDrawable(this, R.drawable.drawer_icon)
 
         toggle.isDrawerIndicatorEnabled = false
