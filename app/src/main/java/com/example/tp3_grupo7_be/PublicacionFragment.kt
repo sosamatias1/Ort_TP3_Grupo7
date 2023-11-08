@@ -76,7 +76,7 @@ class PublicacionFragment : Fragment() {
 
         val provinciasCrudo = Perro.Provincias.values()
         var j = 0;
-        for (i in provinciasCrudo){
+        for (i in 1.. provinciasCrudo.size){
             provincias.add(provinciasCrudo.get(j).provincia)
             j++;
         }

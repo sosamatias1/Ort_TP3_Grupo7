@@ -35,6 +35,26 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     var listaDeImagenes: MutableList<String> = ArrayList()
     lateinit var listaDeRazas: Map<String, MutableList<String>>
 
+    private val razas: List<String> = listOf(
+        "terrier", "terrier", "akita", "retriever", "rottweiler",
+        "stbernard", "corgi", "beagle", "husky", "retriever"
+    )
+
+    private val subrazas: List<String?> = listOf(
+        "wheaten", "bedlington", null, "chesapeake", null,
+        null, "cardigan", null, null, "golden"
+    )
+
+    private val nombresDuenios: List<String?> = listOf(
+        "Carlos","Martina","Diego","Valentina","Juan",
+        "Sofía","Camila","Francisco","Jorge","Matías"
+    )
+
+    private val nombres: List<String?> = listOf(
+        "Pancho", "Negra", "Toto", "Lulu", "Cachito",
+        "Sultan", "Rocco", "Leia", "Jorge Junior", "Roman"
+    )
+
 
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
@@ -106,9 +126,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                 val responseImagenes = response.body()
                 val imagenes = responseImagenes?.imagenes ?: emptyList()
                 listaDeImagenes.clear()
-                for (i in 1 .. 4){
+                for (i in 1..4) {
 
-                listaDeImagenes.add(imagenes[i])
+                    listaDeImagenes.add(imagenes[i])
                 }
 
             } else {
@@ -120,178 +140,29 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     suspend fun cargarDB() {
         if (perroDao?.loadAllPerrosNoAdoptados()!!.isEmpty()) {
-            var raza1 = "terrier";
-            var subraza1= "wheaten"
-            var raza2 = "terrier";
-            var subraza2= "bedlington"
-            var raza3= "akita"
-            var subraza3= null
-            var raza4 = "retriever";
-            var subraza4= "chesapeake"
-            var raza5 = "rottweiler";
-            var subraza5= null
-            var raza6 = "stbernard";
-            var subraza6= null
-            var raza7 = "corgi";
-            var subraza7= "cardigan"
-            var raza8 = "beagle";
-            var subraza8= null
-            var raza9 = "husky";
-            var subraza9= null
-            var raza10 = "retriever";
-            var subraza10= "golden"
+            var razaTemporal: String
+            var subrazaTemporal: String?
 
-            loadImagenes(raza1, subraza1).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro1",
-                    listaDeImagenes,
-                    raza1,
-                    subraza1,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño1",
-                    20
-                )
-            )
-            loadImagenes(raza2, subraza2).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro2",
-                    listaDeImagenes,
-                    raza2,
-                    subraza2,
+            for (i in 0..9) {
+                razaTemporal = razas.get(i)
+                subrazaTemporal = subrazas.get(i)
+                loadImagenes(razaTemporal, subrazaTemporal).await()
 
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño2",
-                    20
+                perroDao?.insertPerro(
+                    Perro(
+                        nombres.get(i),
+                        listaDeImagenes,
+                        razaTemporal,
+                        subrazaTemporal,
+                        Perro.Provincias.values().random().provincia,
+                        3,
+                        Perro.Generos.values().random().genero,
+                        nombresDuenios.get(i),
+                        20
+                    )
                 )
-            )
-            loadImagenes(raza3, subraza3).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro3",
-                    listaDeImagenes,
-                    raza3,
-                    subraza3,
-
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño3",
-                    20
-                )
-            )
-            loadImagenes(raza4, subraza4).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro4",
-                    listaDeImagenes,
-                    raza4,
-                    subraza4,
-
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño4",
-                    20
-                )
-            )
-            loadImagenes(raza5, subraza5).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro5",
-                    listaDeImagenes,
-                    raza5,
-                    subraza5,
-
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño5",
-                    20
-                )
-            )
-            loadImagenes(raza6, subraza6).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro6",
-                    listaDeImagenes,
-                    raza6,
-                    subraza6,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño6",
-                    20
-                )
-            )
-            loadImagenes(raza7, subraza7).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro7",
-                    listaDeImagenes,
-                    raza7,
-                    subraza7,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño7",
-                    20
-                )
-            )
-            loadImagenes(raza8, subraza8).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro8",
-                    listaDeImagenes,
-                    raza8,
-                    subraza8,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño8",
-                    20
-                )
-            )
-            loadImagenes(raza9, subraza9).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro9",
-                    listaDeImagenes,
-                    raza9,
-                    subraza9,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño9",
-                    20
-                )
-            )
-            loadImagenes(raza10, subraza10).await()
-            perroDao?.insertPerro(
-                Perro(
-                    "Perro10",
-                    listaDeImagenes,
-                    raza10,
-                    subraza10,
-                    Perro.Provincias.BUENOS_AIRES.provincia,
-                    3,
-                    Perro.Generos.MACHO.genero,
-                    "Dueño10",
-                    20
-                )
-            )
+            }
         }
-
-
     }
 
     override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
