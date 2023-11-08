@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.tp3_grupo7_be.database.appDatabase
@@ -31,6 +33,7 @@ class DogDetailFragment : Fragment() {
     lateinit var pesoPerro: TextView
     lateinit var botonAdopcion: Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -45,7 +48,7 @@ class DogDetailFragment : Fragment() {
         edadPerro = v.findViewById(R.id.dogDetail_age)
         provinciaPerro = v.findViewById(R.id.dogDetail_provincia)
         generoPerro = v.findViewById(R.id.dogDetail_gender)
-        pesoPerro = v.findViewById(R.id.dogDetail_peso)
+        pesoPerro = v.findViewById(R.id.dogDetail_weight)
         botonAdopcion = v.findViewById(R.id.adoptar_btn)
 
         return v
@@ -84,10 +87,18 @@ class DogDetailFragment : Fragment() {
 
     private fun onClickedButtonAdoption(){
         botonAdopcion.setOnClickListener {
+            try{
             lifecycleScope.launch {
                 val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id)
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
+                Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
             }
+                val action = DogDetailFragmentDirections.actionDogDetailFragmentToAdopcionFragment()
+                this.findNavController().navigate(action)
+            } catch(e: Error) {
+                Toast.makeText(context, "No se pudo completar la solicitud de adopción", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }
