@@ -33,7 +33,7 @@ class DogDetailFragment : Fragment() {
     lateinit var nombrePerro: TextView
     lateinit var edadPerro: TextView
     lateinit var adoptadoTexto: TextView
-    lateinit var adoptante: TextView
+    lateinit var tv_adoptante: TextView
     lateinit var provinciaPerro: TextView
     lateinit var generoPerro: TextView
     lateinit var pesoPerro: TextView
@@ -59,7 +59,7 @@ class DogDetailFragment : Fragment() {
         pesoPerro = v.findViewById(R.id.dogDetail_weight)
         botonAdopcion = v.findViewById(R.id.adoptar_btn)
         duenio = v.findViewById(R.id.tv_detail_duenio)
-        adoptante = v.findViewById(R.id.adoptante_detalle)
+        tv_adoptante = v.findViewById(R.id.adoptante_detalle)
         adoptadoTexto= v.findViewById(R.id.adoptante_texto_detalle)
 
 
@@ -121,8 +121,8 @@ class DogDetailFragment : Fragment() {
 
     private fun estadoAdoptado(){
         if (perro.adoptado){
-            adoptante.text = "Karina"
-            adoptante.visibility = View.VISIBLE
+            tv_adoptante.text = perro.nombreAdoptante
+            tv_adoptante.visibility = View.VISIBLE
             botonAdopcion.isEnabled = false
             botonAdopcion.text = "Adoptado"
             adoptadoTexto.visibility = View.VISIBLE
