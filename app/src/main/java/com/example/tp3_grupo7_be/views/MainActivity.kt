@@ -1,6 +1,8 @@
 package com.example.tp3_grupo7_be.views
 
+import android.content.Context
 import android.os.Bundle
+
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -13,15 +15,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.example.tp3_grupo7_be.FragmentTitles
 import com.example.tp3_grupo7_be.fragments.PerfilFragment
 import com.example.tp3_grupo7_be.fragments.ConfiguracionFragment
+import com.example.tp3_grupo7_be.views.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var sharedViewModel: SharedViewModel
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var navigationView: NavigationView
@@ -32,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+        val sharedPreferences = application.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
         setNavHostFragment()
         setToolbar()
@@ -41,6 +49,37 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(navigationView, navController)
 
+
+        val headerUsernameTextView: TextView = navigationView.getHeaderView(0).findViewById(R.id.tv_header_username)
+
+        val primeraVez = sharedPreferences.getBoolean("sharedPrefs", true)
+
+        if(primeraVez) {
+            val usuario = intent.getStringExtra("username")
+
+            if (!usuario.isNullOrEmpty()) {
+                with (sharedPreferences.edit()) {
+                    putString("usernameKey", usuario)
+                    apply()
+            }
+
+                }
+            with (sharedPreferences.edit()) {
+                putBoolean("is_first_run", false)
+                apply()
+            }
+        }
+
+        val usuarioGuardado = sharedPreferences.getString("usernameKey", "")
+
+        if(!usuarioGuardado.isNullOrEmpty()) {
+            sharedViewModel.setUsername(usuarioGuardado)
+        }
+
+
+        sharedViewModel.username.observe(this, Observer { username ->
+            headerUsernameTextView.text = username
+        })
     }
 
     private fun setNavHostFragment() {
