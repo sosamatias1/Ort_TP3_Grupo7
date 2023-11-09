@@ -29,6 +29,8 @@ class DogDetailFragment : Fragment() {
     private var perroDao: perroDao? = null
     lateinit var nombrePerro: TextView
     lateinit var edadPerro: TextView
+    lateinit var adoptadoTexto: TextView
+    lateinit var adoptante: TextView
     lateinit var provinciaPerro: TextView
     lateinit var generoPerro: TextView
     lateinit var pesoPerro: TextView
@@ -53,6 +55,8 @@ class DogDetailFragment : Fragment() {
         pesoPerro = v.findViewById(R.id.dogDetail_weight)
         botonAdopcion = v.findViewById(R.id.adoptar_btn)
         duenio = v.findViewById(R.id.tv_detail_duenio)
+        adoptante = v.findViewById(R.id.adoptante_detalle)
+        adoptadoTexto= v.findViewById(R.id.adoptante_texto_detalle)
 
         return v
     }
@@ -84,7 +88,7 @@ class DogDetailFragment : Fragment() {
 
         val imageSlider = v.findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)
-
+        estadoAdoptado()
         onClickedButtonAdoption()
 
     }
@@ -103,6 +107,17 @@ class DogDetailFragment : Fragment() {
             } catch(e: Error) {
                 Toast.makeText(context, "No se pudo completar la solicitud de adopción", Toast.LENGTH_SHORT).show()
             }
+
+        }
+    }
+
+    private fun estadoAdoptado(){
+        if (perro.adoptado){
+            adoptante.text = "Karina"
+            adoptante.visibility = View.VISIBLE
+            botonAdopcion.isEnabled = false
+            botonAdopcion.text = "Adoptado"
+            adoptadoTexto.visibility = View.VISIBLE
 
         }
     }

@@ -28,7 +28,11 @@
         android:id="@+id/adopcionFragment"
         android:name="com.example.tp3_grupo7_be.fragments.AdopcionFragment"
         android:label="fragment_adopcion"
-        tools:layout="@layout/fragment_adopcion" />
+        tools:layout="@layout/fragment_adopcion" >
+        <action
+            android:id="@+id/action_adopcionFragment_to_dogDetailFragment"
+            app:destination="@id/dogDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/publicacionFragment"
         android:name="com.example.tp3_grupo7_be.fragments.PublicacionFragment"
