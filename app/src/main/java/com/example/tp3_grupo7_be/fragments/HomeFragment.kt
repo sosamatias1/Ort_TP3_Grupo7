@@ -39,12 +39,12 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     lateinit var listaDeRazas: Map<String, MutableList<String>>
 
     private val razas: List<String> = listOf(
-        "terrier", "terrier", "akita", "retriever", "rottweiler",
+        "terrier", "retriever", "akita", "retriever", "rottweiler",
         "stbernard", "corgi", "beagle", "husky", "retriever"
     )
 
     private val subrazas: List<String?> = listOf(
-        "wheaten", "bedlington", null, "chesapeake", null,
+        "wheaten", "flatcoated", null, "chesapeake", null,
         null, "cardigan", null, null, "golden"
     )
 
