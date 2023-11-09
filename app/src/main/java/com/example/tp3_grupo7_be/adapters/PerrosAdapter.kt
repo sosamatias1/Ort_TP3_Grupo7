@@ -46,6 +46,7 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
         holder.setFavorito(perro.favorito)
         holder.setEdad(perro.edad)
         holder.setGenero(perro.genero)
+        holder.setAdoptado(perro.adoptado)
 
         holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
           clickListener?.onCheckBoxCheckedChange(perro, isChecked)

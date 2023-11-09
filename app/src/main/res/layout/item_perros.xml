@@ -20,13 +20,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-
             tools:srcCompat="@tools:sample/avatars"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/check_adoptado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="Adoptado"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:drawableLeft="@drawable/baseline_check_24"
+            android:drawableTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/edad_perro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nombre_perro"
+            app:layout_constraintVertical_bias="0.5">
+        </TextView>
 
         <TextView
             android:id="@+id/nombre_perro"
@@ -42,7 +58,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5">
-
         </TextView>
 
         <TextView
@@ -58,7 +73,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nombre_perro"
             app:layout_constraintVertical_bias="0.5">
-
         </TextView>
 
         <TextView
@@ -74,7 +88,6 @@
             app:layout_constraintLeft_toRightOf="@id/imagen_pata_subRaza"
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5">
-
         </TextView>
 
         <TextView
@@ -91,7 +104,6 @@
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintRight_toLeftOf="@id/barra_perro">
-
         </TextView>
         <TextView
             android:id="@+id/genero_perro"
@@ -109,7 +121,6 @@
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintLeft_toRightOf="@id/barra_perro">
-
         </TextView>
         <TextView
             android:id="@+id/barra_perro"
@@ -125,7 +136,6 @@
             app:layout_constraintTop_toBottomOf="@id/raza_perro"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintRight_toLeftOf="@id/genero_perro">
-
         </TextView>
 
         <androidx.appcompat.widget.AppCompatCheckBox

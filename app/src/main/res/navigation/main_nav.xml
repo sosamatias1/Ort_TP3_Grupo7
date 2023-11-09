@@ -59,8 +59,8 @@
             android:name="ArgsDogDetail"
             app:argType="com.example.tp3_grupo7_be.models.Perro" />
         <action
-            android:id="@+id/action_dogDetailFragment_to_adopcionFragment"
-            app:destination="@id/adopcionFragment" />
+            android:id="@+id/action_dogDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
         tools:layout="@layout/fragment_configuracion" />
 </navigation>

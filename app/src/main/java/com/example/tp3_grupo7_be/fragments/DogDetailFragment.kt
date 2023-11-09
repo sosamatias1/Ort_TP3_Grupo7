@@ -33,6 +33,7 @@ class DogDetailFragment : Fragment() {
     lateinit var generoPerro: TextView
     lateinit var pesoPerro: TextView
     lateinit var botonAdopcion: Button
+    lateinit var duenio: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +52,7 @@ class DogDetailFragment : Fragment() {
         generoPerro = v.findViewById(R.id.dogDetail_gender)
         pesoPerro = v.findViewById(R.id.dogDetail_weight)
         botonAdopcion = v.findViewById(R.id.adoptar_btn)
+        duenio = v.findViewById(R.id.tv_detail_duenio)
 
         return v
     }
@@ -68,10 +70,11 @@ class DogDetailFragment : Fragment() {
         arguments?.let {
             perro = DogDetailFragmentArgs.fromBundle(it).argsDogDetail
             nombrePerro.text = perro.nombre
-            edadPerro.text = perro.edad.toString()
+            edadPerro.text = "Edad: " + perro.edad.toString()
             provinciaPerro.text = perro.provincia
             generoPerro.text = perro.genero
             pesoPerro.text = perro.peso.toString()
+            duenio.text = perro.nombreDuenio
         }
 
         val imageList = ArrayList<SlideModel>()
@@ -92,10 +95,10 @@ class DogDetailFragment : Fragment() {
             lifecycleScope.launch {
                 val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id)
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
-                Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
             }
+                Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
                 val action =
-                    DogDetailFragmentDirections.actionDogDetailFragmentToAdopcionFragment()
+                    DogDetailFragmentDirections.actionDogDetailFragmentToHomeFragment()
                 this.findNavController().navigate(action)
             } catch(e: Error) {
                 Toast.makeText(context, "No se pudo completar la solicitud de adopción", Toast.LENGTH_SHORT).show()
