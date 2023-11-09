@@ -104,7 +104,7 @@ class PublicacionFragment : Fragment() {
         imagenes.add(imagen)
         val provincia = acProvincias.text.toString()!!
         val genero= acGeneros.text.toString()!!
-        val razaCompleta= acRazas.text.toString().split('-')!!
+        val razaCompleta= acRazas.text.toString().split(" - ")!!
         val raza = razaCompleta.get(0)!!
         val subraza = razaCompleta.get(1)
         perroDao?.insertPerro(
