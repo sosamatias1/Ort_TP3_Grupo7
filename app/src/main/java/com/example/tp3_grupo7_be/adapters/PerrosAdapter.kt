@@ -10,7 +10,7 @@ import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 
 
-class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder>() {
+class PerrosAdapter(private var list: MutableList<Perro>) : Adapter<PerrosHolder>() {
 
     private var clickListener: AdaptadorClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PerrosHolder {
@@ -55,6 +55,11 @@ class PerrosAdapter(private val list: MutableList<Perro>) : Adapter<PerrosHolder
 
     fun setClickListener(listener: AdaptadorClickListener) {
         clickListener = listener
+    }
+
+    public fun setFilteredList(filteredList: MutableList<Perro>) {
+       this.list = filteredList
+       notifyDataSetChanged()
     }
 }
 

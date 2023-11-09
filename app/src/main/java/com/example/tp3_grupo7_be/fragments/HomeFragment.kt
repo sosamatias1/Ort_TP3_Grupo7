@@ -1,11 +1,13 @@
 package com.example.tp3_grupo7_be.fragments
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: PerrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var searchView: SearchView
     var listaDePerros: MutableList<Perro> = ArrayList()
     var listaDeImagenes: MutableList<String> = ArrayList()
     lateinit var listaDeRazas: Map<String, MutableList<String>>
@@ -56,6 +59,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     )
 
 
+
+
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
 
@@ -70,6 +75,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
+        searchView = view.findViewById(R.id.buscador)
+
 
         return view
     }
@@ -79,9 +86,11 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         super.onStart()
         val resultado = loadImagenes("retriever", "golden")
         lifecycleScope.launch {
+
             resultado.await()
             cargarDB()
             initRecyclerView()
+            initSearchView()
             // loadPerroRecycler()
         }
         val context = view?.context
@@ -91,9 +100,42 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         perroDao = db?.perroDao()
 
 
+
     }
 
-    fun initRecyclerView() {
+    override fun onPause() {
+        super.onPause()
+        clearSearchViewText()
+    }
+
+
+
+    private fun initSearchView() {
+        searchView.clearFocus()
+
+        searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(raza: String): Boolean {
+                filterList(raza)
+                return true
+            }
+
+        } )
+    }
+    private fun filterList(text: String) {
+        val listaFiltrada: MutableList<Perro> = ArrayList()
+        for (perro in perroDao?.loadAllPerrosNoAdoptados()!!) {
+                if(perro.raza.lowercase().contains(text.lowercase()) || perro.subRaza.lowercase().contains(text.lowercase())) {
+                    listaFiltrada.add(perro)
+                }
+            adapter.setFilteredList(listaFiltrada)
+        }
+
+    }
+    fun initRecyclerView(){
 
         requireActivity()
         recyclerView.setHasFixedSize(true)
@@ -174,5 +216,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         this.findNavController().navigate(action)
     }
 
+    private fun clearSearchViewText() {
+        searchView.setQuery("", false)
+    }
 
 }
