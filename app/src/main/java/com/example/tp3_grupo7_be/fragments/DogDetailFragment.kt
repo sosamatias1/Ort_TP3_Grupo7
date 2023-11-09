@@ -104,7 +104,7 @@ class DogDetailFragment : Fragment() {
 
     private fun onClickedButtonPhone() {
         telefono.setOnClickListener {
-            val numero = "1234567890" // Replace with the actual phone number
+            val numero = "1234567890"
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$numero")
             }
