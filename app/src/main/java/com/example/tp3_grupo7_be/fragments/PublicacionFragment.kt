@@ -95,7 +95,6 @@ class PublicacionFragment : Fragment() {
 
     private fun sendDataToServer() {
        try {
-
         val nombrePerro = tiNombrePerro.text.toString()!!
         val nombreDuenio = tiNombreDuenio.text.toString()!!
         val edad = tiEdad.text.toString()!!
