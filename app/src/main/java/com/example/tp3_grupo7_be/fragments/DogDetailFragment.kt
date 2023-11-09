@@ -1,6 +1,8 @@
 package com.example.tp3_grupo7_be.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -40,7 +43,7 @@ class DogDetailFragment : Fragment() {
     lateinit var botonAdopcion: Button
     lateinit var duenio: TextView
     lateinit var adoptante: String
-
+    lateinit var telefono: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +64,7 @@ class DogDetailFragment : Fragment() {
         duenio = v.findViewById(R.id.tv_detail_duenio)
         tv_adoptante = v.findViewById(R.id.adoptante_detalle)
         adoptadoTexto= v.findViewById(R.id.adoptante_texto_detalle)
+        telefono= v.findViewById(R.id.duenio_layout_phone)
 
 
         return v
@@ -95,7 +99,19 @@ class DogDetailFragment : Fragment() {
         imageSlider.setImageList(imageList)
         estadoAdoptado()
         onClickedButtonAdoption()
+        onClickedButtonPhone()
+    }
 
+    private fun onClickedButtonPhone() {
+        telefono.setOnClickListener {
+            val numero = "1234567890" // Replace with the actual phone number
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$numero")
+            }
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+            }
+        }
     }
 
     private fun onClickedButtonAdoption(){
