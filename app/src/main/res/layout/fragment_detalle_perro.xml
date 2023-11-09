@@ -212,7 +212,7 @@
                     android:textColor="@color/nombre_perfil_config"
                     android:fontFamily="@font/poppins"
                     android:textSize="20sp"
-                    android:text="Fran" />
+                    android:text="" />
             </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
