@@ -9,6 +9,9 @@
     <string name="btn_subir_foto">Subir Foto</string>
     <string name="general_config">Generales</string>
     <string name="modo_oscuro">Modo Oscuro</string>
+    <string name="duenio">Dueño</string>
+    <string name="adoptar">Adoptar</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="nav_header_hola">Hola</string>
     <string name="getStarted">Get Started</string>
     <string name="ingrese_nombre">Por favor ingrese su nombre</string>
