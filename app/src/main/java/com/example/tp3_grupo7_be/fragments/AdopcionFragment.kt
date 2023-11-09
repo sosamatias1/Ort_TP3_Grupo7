@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
 import com.example.tp3_grupo7_be.models.Perro
 
-class AdopcionFragment : Fragment() {
+class AdopcionFragment : Fragment(), AdaptadorClickListener {
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
     lateinit var recyclerView: RecyclerView
@@ -50,10 +52,23 @@ class AdopcionFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         listaDePerros = perroDao?.loadAllPerrosAdoptados()!!
         adapter = PerrosAdapter(listaDePerros)
+        adapter.setClickListener(this)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = linearLayoutManager
+    }
+
+    override fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean) {
+
+    }
+
+    override fun onViewItemDetail(perro: Perro) {
+        val action =
+            AdopcionFragmentDirections.actionAdopcionFragmentToDogDetailFragment(
+                perro
+            )
+        this.findNavController().navigate(action)
     }
 
 }
