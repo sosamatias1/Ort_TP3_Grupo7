@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tp3_grupo7_be.HomeFragment"
+        android:name="com.example.tp3_grupo7_be.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.example.tp3_grupo7_be.FavoritosFragment"
+        android:name="com.example.tp3_grupo7_be.fragments.FavoritosFragment"
         android:label="fragment_favoritos"
         tools:layout="@layout/fragment_favoritos" >
         <action
@@ -26,14 +26,20 @@
     </fragment>
     <fragment
         android:id="@+id/adopcionFragment"
-        android:name="com.example.tp3_grupo7_be.AdopcionFragment"
+        android:name="com.example.tp3_grupo7_be.fragments.AdopcionFragment"
         android:label="fragment_adopcion"
         tools:layout="@layout/fragment_adopcion" />
     <fragment
         android:id="@+id/publicacionFragment"
-        android:name="com.example.tp3_grupo7_be.PublicacionFragment"
+        android:name="com.example.tp3_grupo7_be.fragments.PublicacionFragment"
         android:label="fragment_publicacion"
-        tools:layout="@layout/fragment_publicacion" />
+        tools:layout="@layout/fragment_publicacion" >
+        <action
+            android:id="@+id/action_publicacionFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.example.tp3_grupo7_be.fragments.PerfilFragment"
@@ -46,12 +52,15 @@
         tools:layout="@layout/fragment_test2" />
     <fragment
         android:id="@+id/dogDetailFragment"
-        android:name="com.example.tp3_grupo7_be.DogDetailFragment"
+        android:name="com.example.tp3_grupo7_be.fragments.DogDetailFragment"
         android:label="fragment_dog_detail"
-        tools:layout="@layout/fragment_dog_detail" >
+        tools:layout="@layout/fragment_detalle_perro" >
         <argument
             android:name="ArgsDogDetail"
             app:argType="com.example.tp3_grupo7_be.models.Perro" />
+        <action
+            android:id="@+id/action_dogDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
         tools:layout="@layout/fragment_configuracion" />
 </navigation>

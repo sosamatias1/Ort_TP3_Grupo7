@@ -50,6 +50,18 @@ class PerrosHolder(v: View): RecyclerView.ViewHolder(v) {
         val checkBox1: CheckBox = view.findViewById(R.id.favorito_perro)
         checkBox1.isChecked = favorito
         }
+
+    fun setAdoptado(adoptado: Boolean) {
+        val checkBox1: CheckBox = view.findViewById(R.id.favorito_perro)
+        val checkAdoptado = view.findViewById<TextView>(R.id.check_adoptado)
+        if(adoptado){
+            checkBox1.visibility = View.GONE
+            checkAdoptado.visibility = View.VISIBLE
+        } else{
+            checkBox1.visibility = View.VISIBLE
+            checkAdoptado.visibility = View.GONE
+        }
+    }
     fun setEdad(edad: Int) {
         val txt: TextView = view.findViewById(R.id.edad_perro)
         txt.text = edad.toString()

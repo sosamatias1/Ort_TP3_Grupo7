@@ -9,5 +9,23 @@
     <string name="btn_subir_foto">Subir Foto</string>
     <string name="general_config">Generales</string>
     <string name="modo_oscuro">Modo Oscuro</string>
+    <string name="duenio">Dueño</string>
+    <string name="adoptar">Adoptar</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="nav_header_hola">Hola</string>
+    <string name="getStarted">Get Started</string>
+    <string name="ingrese_nombre">Por favor ingrese su nombre</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="perro">perro</string>
+    <string name="logo">PawAdopt</string>
+    <string name="nombre">Nombre</string>
+
+    <string name="tituloSlide1">Welcome to PawAdopt</string>
+    <string name="textoSlide1">Discover the joy of pet adoption with PawAdopt! Our app is your gateway to a happier life with new furry friends. Join us in making a difference and giving shelter dogs a loving home.</string>
+
+    <string name="tituloSlide2">Find Your Furry Soulmate</string>
+    <string name="textoSlide2">Looking for a loyal companion? With PawAdopt, easily browse and adopt adorable dogs for endless joy. Let us help you find your perfect match among our lovable four-legged pals.</string>
+
+    <string name="tituloSlide3">Build Your Pawsitive Playlist</string>
+    <string name="textoSlide3">Customize your \pawsitive\ experience by saving favorite dog profiles and helping them find forever homes. Together, we can create a world where every dog has a place in your heart and home.</string>
 </resources>

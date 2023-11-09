@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/roboto400"
-            android:text="Fran"
+            android:text=""
             android:textColor="@color/nombre_perfil_config"
             android:textSize="32sp" />
 
@@ -46,14 +46,11 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_animado"
+            style="@style/botonCustom"
             android:backgroundTint="@color/subir_foto_btn"
-            android:gravity="center"
             android:text="@string/btn_subir_foto"
             android:textAlignment="center"
-            android:textColor="@color/subir_foto_txt"
             android:textSize="15sp"
-            android:textAllCaps="false"
             android:fontFamily="@font/nunito700"/>
 
 
