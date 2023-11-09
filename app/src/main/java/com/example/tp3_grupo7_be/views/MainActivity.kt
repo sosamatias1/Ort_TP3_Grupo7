@@ -18,9 +18,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.example.tp3_grupo7_be.FragmentTitles
 import com.example.tp3_grupo7_be.fragments.PerfilFragment
 import com.example.tp3_grupo7_be.fragments.ConfiguracionFragment
+import com.example.tp3_grupo7_be.fragments.FragmentTitles
 import com.example.tp3_grupo7_be.views.viewmodels.SharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
