@@ -43,5 +43,8 @@ interface perroDao {
     @Query("SELECT * FROM perros WHERE nombre = :nombre ORDER BY id")
     fun loadAllPerrosPorNombre(nombre: String): MutableList<Perro>
 
+    @Query("SELECT raza FROM perros WHERE adoptado = false GROUP BY raza")
+    fun loadAllRazas(): MutableList<String>
+
 
 }

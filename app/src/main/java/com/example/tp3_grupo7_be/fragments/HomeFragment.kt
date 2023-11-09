@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.R
+import com.example.tp3_grupo7_be.adapters.FiltrosAdapter
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
@@ -32,6 +33,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: PerrosAdapter
+
+    lateinit var recyclerViewFiltros: RecyclerView
+    lateinit var adapterFiltros: FiltrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var searchView: SearchView
     var listaDePerros: MutableList<Perro> = ArrayList()
@@ -76,7 +80,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recycler_home)
         searchView = view.findViewById(R.id.buscador)
-
+        recyclerViewFiltros = view.findViewById(R.id.recycler_filtro)
 
         return view
     }
@@ -89,6 +93,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
             resultado.await()
             cargarDB()
+            initRecyclerViewFiltros()
             initRecyclerView()
             initSearchView()
             // loadPerroRecycler()
@@ -147,6 +152,33 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         recyclerView.layoutManager = linearLayoutManager
 
     }
+
+    fun initRecyclerViewFiltros() {
+        var filtros: MutableList<String>
+        filtros = perroDao?.loadAllRazas() ?: emptyList<String>() as MutableList<String>
+
+
+        recyclerViewFiltros.setHasFixedSize(true)
+        adapterFiltros = FiltrosAdapter(filtros)
+        recyclerViewFiltros.adapter = adapterFiltros
+        adapterFiltros.setClickListener(this)
+        linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewFiltros.layoutManager = linearLayoutManager
+
+
+    }
+
+    override fun onFilterSelected(filtro: String) {
+        val listaFiltrada = listaDePerros.filter { it.raza == filtro } as MutableList
+        adapter.setFilteredList(listaFiltrada)
+
+
+    }
+
+    override fun onFilterRemoved() {
+        adapter.setFilteredList(listaDePerros)
+    }
+
 
     fun loadImagenes(raza: String, subraza: String?): Deferred<Unit> {
         val service = ActivityServiceApiBuilder.create()

@@ -71,4 +71,12 @@ class AdopcionFragment : Fragment(), AdaptadorClickListener {
         this.findNavController().navigate(action)
     }
 
+    override fun onFilterSelected(filter: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFilterRemoved() {
+        TODO("Not yet implemented")
+    }
+
 }
