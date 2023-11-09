@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.ImageSlider
@@ -18,11 +20,12 @@ import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.models.Perro
+import com.example.tp3_grupo7_be.views.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
 
 
 class DogDetailFragment : Fragment() {
-
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     lateinit var v: View
     lateinit var perro: Perro
     private var db: appDatabase? = null
@@ -36,6 +39,7 @@ class DogDetailFragment : Fragment() {
     lateinit var pesoPerro: TextView
     lateinit var botonAdopcion: Button
     lateinit var duenio: TextView
+    lateinit var adoptante: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +61,7 @@ class DogDetailFragment : Fragment() {
         duenio = v.findViewById(R.id.tv_detail_duenio)
         adoptante = v.findViewById(R.id.adoptante_detalle)
         adoptadoTexto= v.findViewById(R.id.adoptante_texto_detalle)
+
 
         return v
     }
@@ -97,7 +102,10 @@ class DogDetailFragment : Fragment() {
         botonAdopcion.setOnClickListener {
             try{
             lifecycleScope.launch {
-                val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id)
+                sharedViewModel.username.observe(viewLifecycleOwner, Observer { username ->
+                    adoptante = username
+                })
+                val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id, adoptante)
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
             }
                 Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
