@@ -17,7 +17,11 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/buscador"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="true"
+            app:queryBackground="@drawable/search_view"
+            app:searchHintIcon="@null"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_home"

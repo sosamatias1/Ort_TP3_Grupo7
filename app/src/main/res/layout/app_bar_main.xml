@@ -25,7 +25,6 @@
             android:fontFamily="@font/poppins700"
             android:textSize="23sp"
             android:lineHeight="34.5dp"
-            android:textColor="@color/titulo_toolbar"
             />
 
     </androidx.appcompat.widget.Toolbar>

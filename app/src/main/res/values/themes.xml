@@ -5,15 +5,12 @@
         <item name="colorPrimary">@color/lila</item>
         <item name="colorPrimaryVariant">@color/lilaDark</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColor">@color/black</item>
         <!-- Customize your dark theme here. -->
-        <item name="colorSecondary">@color/lila</item>
-        <item name="colorSecondaryVariant">@color/lilaDark</item>
-        <item name="colorOnSecondary">@color/grisOscuro</item>
-
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
 
     <style name="Theme.TP3grupo7BE" parent="Base.Theme.TP3grupo7BE" />
 </resources>
