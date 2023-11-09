@@ -85,4 +85,12 @@ class FavoritosFragment : Fragment(), AdaptadorClickListener {
             )
         this.findNavController().navigate(action)
     }
+
+    override fun onFilterSelected(filter: String) {
+
+    }
+
+    override fun onFilterRemoved() {
+
+    }
 }
