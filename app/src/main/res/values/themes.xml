@@ -2,7 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TP3grupo7BE" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/lila</item>
+        <item name="colorPrimaryVariant">@color/lilaDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Customize your dark theme here. -->
+        <item name="colorSecondary">@color/lila</item>
+        <item name="colorSecondaryVariant">@color/lilaDark</item>
+        <item name="colorOnSecondary">@color/grisOscuro</item>
+
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

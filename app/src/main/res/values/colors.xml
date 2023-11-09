@@ -14,5 +14,7 @@
     <color name= "getStartedTitleColor">#5F5B5B</color>
     <color name= "getStartedTextColor">#ADA8A8</color>
     <color name="lila">#827397</color>
+    <color name="lilaDark">#433359</color>
+    <color name="grisOscuro">#403B3B</color>
 
 </resources>

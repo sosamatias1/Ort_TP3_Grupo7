@@ -1,7 +1,9 @@
 package com.example.tp3_grupo7_be.views
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.ui.setupWithNavController
 import com.example.tp3_grupo7_be.R
 import com.google.android.material.navigation.NavigationView
@@ -35,12 +38,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var toolbar: Toolbar
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
-        val sharedPreferences = application.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = application.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
         setNavHostFragment()
         setToolbar()
@@ -80,6 +84,14 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel.username.observe(this, Observer { username ->
             headerUsernameTextView.text = username
         })
+
+        sharedPreferences = getSharedPreferences("modoOscuro", Context.MODE_PRIVATE)
+        val modoOscuro = sharedPreferences.getBoolean("modoOscuro", false)
+        if(modoOscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun setNavHostFragment() {
