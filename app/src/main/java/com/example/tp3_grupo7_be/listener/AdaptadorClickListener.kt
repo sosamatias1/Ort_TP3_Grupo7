@@ -7,4 +7,8 @@ interface AdaptadorClickListener {
      fun onCheckBoxCheckedChange(perro: Perro, isChecked: Boolean)
 
      fun onViewItemDetail(perro: Perro)
+
+     fun onFilterSelected(filter: String)
+
+     fun onFilterRemoved()
 }
