@@ -260,7 +260,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="170dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/round_call_24"
                         app:shapeAppearanceOverlay="@style/perfil_circular"

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
@@ -39,6 +40,8 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
 
     lateinit var recyclerViewFiltros: RecyclerView
+
+    lateinit var barraProgreso: ProgressBar
     lateinit var adapterFiltros: FiltrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var searchView: SearchView
@@ -86,18 +89,20 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         recyclerView = view.findViewById(R.id.recycler_home)
         searchView = view.findViewById(R.id.buscador)
         recyclerViewFiltros = view.findViewById(R.id.recycler_filtro)
-
+        barraProgreso = view.findViewById(R.id.barra_progreso_home)
         return view
     }
 
 
     override fun onStart() {
         super.onStart()
+        barraProgreso.visibility = View.VISIBLE
         val resultado = loadImagenes("retriever", "golden")
         lifecycleScope.launch {
 
             resultado.await()
             cargarDB()
+            barraProgreso.visibility = View.GONE
             initRecyclerViewFiltros()
             initRecyclerView()
             initSearchView()
