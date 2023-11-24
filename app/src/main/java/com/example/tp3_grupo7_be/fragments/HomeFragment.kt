@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,12 +31,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import kotlin.random.Random
 
 
 class HomeFragment : Fragment(), AdaptadorClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: PerrosAdapter
+
 
     lateinit var recyclerViewFiltros: RecyclerView
 
@@ -71,7 +75,10 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
+
     private var adoptadoDao: adoptadoDao? = null
+
+    private var filtroSeleccionado: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +116,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         if (context != null) {
             db = appDatabase.getAppDataBase(context)
         }
+
         perroDao = db?.perroDao()
         adoptadoDao = db?.adoptadoDao()
 
@@ -138,12 +146,20 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
         } )
     }
-    private fun filterList(text: String) {
+        private fun filterList(text: String) {
         val listaFiltrada: MutableList<Perro> = ArrayList()
         for (perro in perroDao?.loadAllPerrosNoAdoptados()!!) {
-                if(perro.raza.lowercase().contains(text.lowercase()) || perro.subRaza.lowercase().contains(text.lowercase())) {
+
+            if (text.isEmpty()) {
+                if (filtroSeleccionado == null || perro.raza == filtroSeleccionado) {
                     listaFiltrada.add(perro)
                 }
+            } else {
+                if ((perro.raza.lowercase().contains(text.lowercase()) || perro.subRaza.lowercase().contains(text.lowercase()) || perro.edad.toString().contains(text.lowercase())) && (filtroSeleccionado == null || perro.raza == filtroSeleccionado)) {
+                    listaFiltrada.add(perro)
+                }
+            }
+
             adapter.setFilteredList(listaFiltrada)
         }
 
@@ -177,14 +193,26 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
     }
 
     override fun onFilterSelected(filtro: String) {
-        val listaFiltrada = listaDePerros.filter { it.raza == filtro } as MutableList
+        filtroSeleccionado = filtro
+        var listaFiltrada = listaDePerros.filter { it.raza == filtroSeleccionado} as MutableList
+    if(searchView.query.isNotEmpty()) {
+        listaFiltrada =
+            listaDePerros.filter { it.raza == filtroSeleccionado && it.edad.toString() == searchView.query.toString() } as MutableList
+    }
         adapter.setFilteredList(listaFiltrada)
 
 
     }
 
     override fun onFilterRemoved() {
-        adapter.setFilteredList(listaDePerros)
+        filtroSeleccionado = null
+        var listaFiltrada = listaDePerros
+        if(searchView.query.isNotEmpty()) {
+            listaFiltrada =
+                listaDePerros.filter { it.edad.toString() == searchView.query.toString() || it.raza == searchView.query.toString() || it.subRaza == searchView.query.toString()} as MutableList
+        }
+        // adapter.setFilteredList(listaDePerros)
+        adapter.setFilteredList(listaFiltrada)
     }
 
 
@@ -229,7 +257,7 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
                         razaTemporal,
                         subrazaTemporal,
                         Perro.Provincias.values().random().provincia,
-                        3,
+                        Random.nextInt(3),
                         Perro.Generos.values().random().genero,
                         nombresDuenios.get(i),
                         20
