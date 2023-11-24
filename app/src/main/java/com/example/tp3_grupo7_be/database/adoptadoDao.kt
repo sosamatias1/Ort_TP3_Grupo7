@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.tp3_grupo7_be.models.Adoptado
-import com.example.tp3_grupo7_be.models.Perro
 
 @Dao
 interface adoptadoDao {

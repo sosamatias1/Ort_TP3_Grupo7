@@ -83,6 +83,7 @@ class DogDetailFragment : Fragment() {
             db = appDatabase.getAppDataBase(context)
         }
         perroDao = db?.perroDao()
+        adoptadoDao = db?.adoptadoDao()
 
         arguments?.let {
             perro = DogDetailFragmentArgs.fromBundle(it).argsDogDetail
@@ -127,12 +128,12 @@ class DogDetailFragment : Fragment() {
                 })
                 val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id, adoptante)
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
-                adoptado = Adoptado(perro.id, perro.nombreDuenio)
+                adoptado = Adoptado(perro.id, adoptante)
                 adoptadoDao?.insertAdoptado(adoptado)
                 val adoptadoDB = adoptadoDao?.loadAdoptadosById(adoptado.idPerro)
-                //if (adoptadoDB != null) {
-                //    Log.d("DebugAdoptados", "Id adoptadoDB: ${adoptadoDB.idPerro} + Adoptado: ${adoptado.idPerro}")
-                //}
+                if (adoptadoDB != null) {
+                    Log.d("DebugAdoptados", "Id adoptadoDB: ${adoptadoDB.idPerro} + Adoptado: ${adoptado.idPerro}")
+                }
 
             }
                 Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()

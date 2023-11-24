@@ -33,6 +33,7 @@ class Adoptado(
     )
 
     init {
+        this.id= 0
         this.idPerro = idPerro!!
         this.duenio = duenio!!
     }
@@ -48,33 +49,14 @@ class Adoptado(
         parcel.writeString(duenio)
     }
 
-    companion object CREATOR : Parcelable.Creator<Perro> {
+    companion object CREATOR : Parcelable.Creator<Adoptado> {
         @RequiresApi(Build.VERSION_CODES.Q)
-        override fun createFromParcel(parcel: Parcel): Perro {
-            return Perro(parcel)
+        override fun createFromParcel(parcel: Parcel): Adoptado {
+            return Adoptado(parcel)
         }
 
-        override fun newArray(size: Int): Array<Perro?> {
+        override fun newArray(size: Int): Array<Adoptado?> {
             return arrayOfNulls(size)
         }
     }
-    enum class Provincias(val provincia: String) {
-        BUENOS_AIRES("Buenos Aires"),
-        CORDOBA("Cordoba"),
-        SANTA_FE("Santa Fe")
-    }
-
-    fun getProvinciasList(): List<String> {
-        return Provincias.values().map { it.provincia }
-    }
-
-    enum class Generos(val genero: String) {
-        MACHO("Macho"),
-        HEMBRA("Hembra")
-    }
-
-    fun getGenerosList(): List<String> {
-        return Generos.values().map { it.genero }
-    }
-
 }
