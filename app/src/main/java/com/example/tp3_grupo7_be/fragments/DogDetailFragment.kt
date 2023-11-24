@@ -20,8 +20,10 @@ import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.tp3_grupo7_be.R
+import com.example.tp3_grupo7_be.database.adoptadoDao
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
+import com.example.tp3_grupo7_be.models.Adoptado
 import com.example.tp3_grupo7_be.models.Perro
 import com.example.tp3_grupo7_be.views.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
@@ -31,8 +33,10 @@ class DogDetailFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
     lateinit var v: View
     lateinit var perro: Perro
+    lateinit var adoptado: Adoptado
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
+    private var adoptadoDao: adoptadoDao? = null
     lateinit var nombrePerro: TextView
     lateinit var edadPerro: TextView
     lateinit var adoptadoTexto: TextView
@@ -123,6 +127,13 @@ class DogDetailFragment : Fragment() {
                 })
                 val filasActualizadas = perroDao?.updateAdoptadoPerro(perro.id, adoptante)
                 Log.d("Debug", "Filas actualizadas: $filasActualizadas")
+                adoptado = Adoptado(perro.id, perro.nombreDuenio)
+                adoptadoDao?.insertAdoptado(adoptado)
+                val adoptadoDB = adoptadoDao?.loadAdoptadosById(adoptado.idPerro)
+                //if (adoptadoDB != null) {
+                //    Log.d("DebugAdoptados", "Id adoptadoDB: ${adoptadoDB.idPerro} + Adoptado: ${adoptado.idPerro}")
+                //}
+
             }
                 Toast.makeText(context, "Adoptaste a " + perro.nombre, Toast.LENGTH_SHORT).show()
                 val action =
