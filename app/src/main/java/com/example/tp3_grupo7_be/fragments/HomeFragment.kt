@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.FiltrosAdapter
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
+import com.example.tp3_grupo7_be.database.adoptadoDao
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
@@ -74,6 +75,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
 
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
+
+    private var adoptadoDao: adoptadoDao? = null
+
     private var filtroSeleccionado: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,7 +116,9 @@ class HomeFragment : Fragment(), AdaptadorClickListener {
         if (context != null) {
             db = appDatabase.getAppDataBase(context)
         }
-        perroDao = db?. perroDao()
+
+        perroDao = db?.perroDao()
+        adoptadoDao = db?.adoptadoDao()
 
 
 

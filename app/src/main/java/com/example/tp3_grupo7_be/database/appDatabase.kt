@@ -6,12 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.tp3_grupo7_be.models.Perro
+import com.example.tp3_grupo7_be.models.Adoptado
 import com.example.tp3_grupo7_be.models.StringListConverter
 
-@Database(entities = [Perro::class], version = 6, exportSchema = false)
+@Database(entities = [Perro::class, Adoptado::class], version = 8, exportSchema = false)
 @TypeConverters(StringListConverter::class)
 abstract class appDatabase : RoomDatabase() {
     abstract fun perroDao(): perroDao
+    abstract fun adoptadoDao(): adoptadoDao
 
     companion object {
 

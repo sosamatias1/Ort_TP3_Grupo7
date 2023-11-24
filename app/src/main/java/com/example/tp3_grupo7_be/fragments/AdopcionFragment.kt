@@ -10,18 +10,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3_grupo7_be.R
 import com.example.tp3_grupo7_be.adapters.PerrosAdapter
+import com.example.tp3_grupo7_be.database.adoptadoDao
 import com.example.tp3_grupo7_be.database.appDatabase
 import com.example.tp3_grupo7_be.database.perroDao
 import com.example.tp3_grupo7_be.listener.AdaptadorClickListener
+import com.example.tp3_grupo7_be.models.Adoptado
 import com.example.tp3_grupo7_be.models.Perro
 
 class AdopcionFragment : Fragment(), AdaptadorClickListener {
     private var db: appDatabase? = null
     private var perroDao: perroDao? = null
+    private var adoptadoDao: adoptadoDao? = null
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: PerrosAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var listaDePerros: MutableList<Perro> = ArrayList()
+    var listaDeAdoptados: MutableList<Adoptado> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,7 @@ class AdopcionFragment : Fragment(), AdaptadorClickListener {
             db = appDatabase.getAppDataBase(context)
         }
         perroDao = db?.perroDao()
+        adoptadoDao = db?.adoptadoDao()
         initRecyclerView()
 
     }
